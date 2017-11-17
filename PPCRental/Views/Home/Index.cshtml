@@ -31,22 +31,22 @@
                 <div class="container" style="float:left">
                     <div class="row mt-5">
                         <div class="col-md-12 h-25 ml-5" >
-                            <div class="panel panel-default h-25 w-50 mx-auto" style="margin-top:200px">
-                                <div class="panel-heading">
-                                    <span class="glyphicon glyphicon-filter"></span> Filter
+                            <div class="panel panel-default h-25 w-50 mx-auto" style="margin-top: 200px; background-color: #ffffff4a">
+                                <div class="panel-heading" style="background-color: #829ce482">
+                                    <span class="glyphicon glyphicon-filter" style=""></span> <strong>Filter</strong>
                                 </div>
-                                <div class="panel-body">
-                                    <form class="form-inline" role="form">
+                                <div class="panel-body" style="background-color: #ffffff4a">
+                                    <form class="form-inline" action="/Project/Filter" role="form">
                                         <div class="form-row">
                                             <div class="form-group">
                                                 <div class="col">
-                                                    <label for="inputDistrict3" class="col-sm-3 control-label">
+                                                    <label for="inputDistrict3" class="col-sm-3 control-label" style="color:black">
                                                         District
                                                     </label>
                                                     <div style="width:190px">
-                                                        <select class="custom-select h-25 w-100"  id="inlineFormCustomSelectPref">
+                                                        <select name="area" class="custom-select h-25 w-100"  id="inlineFormCustomSelectPref">
 
-                                                            <option selected value="AllDistrict">All Area</option>
+                                                            <option selected value="99">All Area</option>
                                                             @foreach (var item in listDistrict)
                                                             {
                                                                 if (@item.ID <= 54 && item.ID >= 31)
@@ -67,11 +67,11 @@
                                                             Type
                                                         </label>
                                                         <div style="width:190px">
-                                                            <select class="custom-select h-25 w-100" id="inlineFormCustomSelectPref">
-                                                                <option value="AllType">All Type</option>
+                                                            <select name="type" class="custom-select h-25 w-100" id="inlineFormCustomSelectPref">
+                                                                <option value="99">All Type</option>
                                                                 @foreach (var item in listProperty_type)
                                                                 {
-                                                                    <option value="@item.CodeType">@item.CodeType</option>
+                                                                    <option value="@item.ID">@item.CodeType</option>
                                                                 }
 
                                                             </select>
@@ -90,7 +90,7 @@
                                                             Min 
                                                         </label>
                                                         <div style="width:190px">
-                                                            <input type="text" id="name" class="form-control" placeholder="Min Price">
+                                                            <input type="text" name="min" class="form-control" placeholder="Min Price">
                                                         </div>
                                                     </div>
                                             </div>
@@ -102,14 +102,14 @@
                                                         </label>
                                                         <div>
                                                             <div style="width:190px">
-                                                                <input type="text" id="name" class="form-control" placeholder="Max Price">
+                                                                <input type="text"name="max" class="form-control" placeholder="Max Price">
                                                             </div>
                                                         </div>
                                                     </div>
                                             </div>
                                                 <div class="form-group mt-4">
-                                                    <div class="col" style="margin-top:5px">
-                                                        <a href="#" class="btn btn-danger btn-block glyphicon glyphicon-filter" role="button"> Filter</a>
+                                                    <div class="col" style="margin-top:7px">
+                                                        <input type="submit" value="Filter" class="btn btn-danger btn-block glyphicon glyphicon-filter" role="button"></a>
                                                     </div>
                                                 </div>
                                                      

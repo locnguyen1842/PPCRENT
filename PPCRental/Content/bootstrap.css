@@ -5446,9 +5446,10 @@ a.list-group-item:focus {
 }
 
 .panel-default > .panel-heading {
-  color: #333333;
+  color: #02195a;
   background-color: #f5f5f5;
   border-color: #dddddd;
+  font-size:2rem;
 }
 
 .panel-default > .panel-heading + .panel-collapse .panel-body {

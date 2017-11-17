@@ -156,7 +156,31 @@ namespace PPCRental.Controllers
             }
             base.Dispose(disposing);
         }
-       
+
+        public ActionResult Filter(int? area,int? type,int? min, int? max)
+        {
+            var project = db.PROPERTies.ToList();
+            if (area != 99){
+                project = project.Where(p => p.District_ID == area).ToList();
+                
+            }
+            if (type != 99)
+            {
+                project = project.Where(p => p.PropertyType_ID == type).ToList();
+            }
+            if (!String.IsNullOrEmpty(min.ToString()))
+            {
+                min = 0;
+                project = project.Where(p => p.Price >= min).ToList();
+            }
+            if (max.ToString() == "")
+            {
+                max = 0;
+                project = project.Where(p => p.Price >= min).ToList();
+            }
+            return View(project);
+
+        }
 
         
     }
