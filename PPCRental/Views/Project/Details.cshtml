@@ -1,0 +1,67 @@
+﻿@model PPCRental.Models.PROPERTY
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <title>@Html.DisplayFor(model => model.PropertyName)</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/index.css" rel="stylesheet" />
+    <link href="~/Content/carousel.css" rel="stylesheet" />
+    
+
+</head>
+<body>
+    <br /><br /><br />
+    <div class="container">
+        <div id="post">
+            <h2>@Html.DisplayFor(model => model.PropertyName)</h2>
+            <h5>@Html.DisplayFor(model => model.DISTRICT.DistrictName), @Html.DisplayFor(model => model.WARD.WardName), @Html.DisplayFor(model => model.STREET.StreetName).<span style="float:right;color:blue">Price: @Html.DisplayFor(model=> model.Price) @Html.DisplayFor(model => model.UnitPrice)</span></h5>
+            <p class="subtit">Bath room: @Html.DisplayFor(model => model.BathRoom). ------------ Bed room: @Html.DisplayFor(model => model.BedRoom). ------------ Parking Place: @Html.DisplayFor(model => model.PackingPlace).</p>
+            <p class="subtit"></p>
+            <hr />
+
+
+            <img  src="~/Images/@Html.DisplayFor(model=> model.Avatar)" alt="@Html.DisplayNameFor(model=> model.Avatar)">
+            <br />
+            
+                <h4 >Description</h4><br />
+                <div style="border-style: solid; border-width: 2px; border-radius: 5px; padding: 5px 0px 5px 5px">
+                    <p style="margin-left:5px">@Html.DisplayFor(model => model.Content)</p>
+                </div>
+            <br />
+            <h4 style="background-color:gray;padding:5px 0px 5px 5px;color:white">Details</h4><br />
+                <hr />
+                <div id="bordercontent" >
+                    <div class="col-md-4">Property @Html.DisplayNameFor(model => model.ID) : @Html.DisplayFor(model => model.ID)</div>
+                    <div class="col-md-4">@Html.DisplayNameFor(model => model.Price) : @Html.DisplayFor(model => model.Price) @Html.DisplayFor(model => model.UnitPrice)</div>
+                    <div class="col-md-4">@Html.DisplayNameFor(model => model.Area) : @Html.DisplayFor(model => model.Area)</div>
+                    <div class="col-md-4">@Html.DisplayNameFor(model => model.BedRoom) : @Html.DisplayFor(model => model.BedRoom)</div>
+                    <div class="col-md-4">@Html.DisplayNameFor(model => model.BathRoom) : @Html.DisplayFor(model => model.BathRoom)</div>
+                    <div class="col-md-4">Type : @Html.DisplayFor(model => model.PROPERTY_TYPE.CodeType)</div>
+                </div>
+                <br />
+                <br />
+                <hr />
+            <h4 style="background-color:gray;padding:5px 0px 5px 5px;color:white">Owner Contact</h4> <br />
+            <div class="owner_contact" style="border-style:solid;border-width:2px;border-radius:5px;padding:5px 0px 5px 5px">
+               
+                @Html.DisplayNameFor(model => model.USER.FullName): <a href="tel:@Html.DisplayFor(model=>model.USER.FullName)">@Html.DisplayFor(model => model.USER.FullName)</a> <br />
+                @Html.DisplayNameFor(model => model.USER.Email): <a href="mailto:@Html.DisplayFor(model=>model.USER.Email)">@Html.DisplayFor(model => model.USER.Email)</a><br />
+                @Html.DisplayNameFor(model => model.USER.Phone): <a href="tel:@Html.DisplayFor(model=>model.USER.Phone)">@Html.DisplayFor(model => model.USER.Phone)</a><br />
+
+            </div>     
+        </div>
+    </div>
+    <br />
+    <p>
+        <!--//@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |-->
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    
+</body>
+</html>

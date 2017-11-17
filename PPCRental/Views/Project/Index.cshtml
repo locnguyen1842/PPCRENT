@@ -1,0 +1,116 @@
+﻿@model IEnumerable<object>
+
+
+@{
+    ViewBag.Title = "Listings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<PPCRental.Models.PROPERTY> lstProperty = Model.ToList()[0] as List<PPCRental.Models.PROPERTY>;
+    List<PPCRental.Models.DISTRICT> lstDistrict = Model.ToList()[1] as List<PPCRental.Models.DISTRICT>;
+    List<PPCRental.Models.PROPERTY_TYPE> lstPType = Model.ToList()[2] as List<PPCRental.Models.PROPERTY_TYPE>;
+}
+<!DOCTYPE HTML>
+<head>
+    <meta charset="utf-8" />
+    <title>Listings</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/index.css" rel="stylesheet" />
+    <link href="~/Content/carousel.css" rel="stylesheet" />
+</head>
+<body>
+    <br />
+    <h3 style="margin-top:30px">Listings</h3>
+    <hr class="featurette-divider">
+
+    <br />
+    <br />
+    <div class="container">
+
+        <div id="post">
+
+            <div class="row">
+                @foreach (var item in lstProperty)
+                {
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <img src="~/Images/@item.Avatar" alt="@item.Avatar" />
+                            <div class="caption">
+                                <h3 class="card-title">@item.PropertyName</h3>
+                                <h4 class="card-subtitle mb-2 text-muted">@item.DISTRICT.DistrictName, @item.WARD.WardName, @item.STREET.StreetName</h4>
+                                <p>@item.Content.Substring(1, 10)...</p>
+                                <p>Price: @item.Price</p>
+                                <p><a href="/Project/Details/@item.ID" class="btn btn-primary" role="button"> Xem tiếp </a></p>
+                            </div>
+                        </div>
+                        <!--
+                        Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                        Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                        Html.ActionLink("Delete", "Delete", new { id=item.ID })
+                        -->
+
+
+                    </div>
+
+                }
+            </div>
+
+        </div>
+        <div id="sidebar">
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-md-offset-3 col-lg-offset-0">
+                    <div class="well">
+                        <h3 align="center">Filter</h3>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="location1" class="control-label">District</label>
+                                
+                                <select class="form-control" name="" id="location1">
+                                    <option value="All">All ares</option>
+                                    @foreach (var item in lstDistrict){
+                                    if(@item.ID <=54  &&item.ID >=31){
+                                    <option value="@item.DistrictName">@item.DistrictName</option>
+                                    }
+                                    }
+                                    
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="type1" class="control-label">Type</label>
+                                <select class="form-control" name="" id="location1">
+                                    <option value="All">All Type</option>
+                                    @foreach (var item in lstPType)
+                                    {
+                                       
+                                            <option value="@item.CodeType">@item.CodeType</option>
+                                      
+                                    }
+
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="pricefrom" class="control-label">Min Price</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon" id="basic-addon1">$</div>
+                                    <input type="text" class="form-control" id="pricefrom" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="priceto" class="control-label">Max Price</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon" id="basic-addon2">$</div>
+                                    <input type="text" class="form-control" id="priceto" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <p class="text-center"><a href="#" class="btn btn-danger btn-block glyphicon glyphicon-filter" role="button"></a></p>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    
+</body>

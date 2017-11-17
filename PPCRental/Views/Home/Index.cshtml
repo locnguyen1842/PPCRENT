@@ -1,0 +1,205 @@
+﻿@model IEnumerable<object>
+
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<PPCRental.Models.PROPERTY> listProperty = Model.ToList()[0] as List<PPCRental.Models.PROPERTY>;
+    List<PPCRental.Models.DISTRICT> listDistrict = Model.ToList()[1] as List<PPCRental.Models.DISTRICT>;
+    List<PPCRental.Models.PROPERTY_TYPE> listProperty_type = Model.ToList()[2] as List<PPCRental.Models.PROPERTY_TYPE>;
+}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>PPC Rental</title>
+
+    <!-- Custom styles for this template -->
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/index.css" rel="stylesheet" />
+    <link href="~/Content/carousel.css" rel="stylesheet" />
+</head>
+<body>
+
+
+
+    <main role="main">
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="first-slide" src="~/Images/apartment-1.jpg" alt="First slide">
+                <div class="container" style="float:left">
+                    <div class="row mt-5">
+                        <div class="col-md-12 h-25 ml-5" >
+                            <div class="panel panel-default h-25 w-50 mx-auto" style="margin-top:200px">
+                                <div class="panel-heading">
+                                    <span class="glyphicon glyphicon-filter"></span> Filter
+                                </div>
+                                <div class="panel-body">
+                                    <form class="form-inline" role="form">
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <div class="col">
+                                                    <label for="inputDistrict3" class="col-sm-3 control-label">
+                                                        District
+                                                    </label>
+                                                    <div style="width:190px">
+                                                        <select class="custom-select h-25 w-100"  id="inlineFormCustomSelectPref">
+
+                                                            <option selected value="AllDistrict">All Area</option>
+                                                            @foreach (var item in listDistrict)
+                                                            {
+                                                                if (@item.ID <= 54 && item.ID >= 31)
+                                                                {
+                                                                    <option value="@item.ID">@item.DistrictName</option>
+                                                                }
+                                                            }
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                                <div class="form-group">
+                                                    <div class="col">
+                                                        <label for="inputPropertyType3" class="col-sm-2 control-label">
+                                                            Type
+                                                        </label>
+                                                        <div style="width:190px">
+                                                            <select class="custom-select h-25 w-100" id="inlineFormCustomSelectPref">
+                                                                <option value="AllType">All Type</option>
+                                                                @foreach (var item in listProperty_type)
+                                                                {
+                                                                    <option value="@item.CodeType">@item.CodeType</option>
+                                                                }
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                        
+                                        <div class="form-row mt-3" >
+                                            
+                                                <div class="form-group" style="width:220px">
+                                                    <div class="col">
+                                                        <label for="inputMin" class="col-sm-2 control-label">
+                                                            Min 
+                                                        </label>
+                                                        <div style="width:190px">
+                                                            <input type="text" id="name" class="form-control" placeholder="Min Price">
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            
+                                                <div class="form-group">
+                                                    <div class="col">
+                                                        <label for="inputDistrict3" class="col-sm-2 control-label">
+                                                            Max 
+                                                        </label>
+                                                        <div>
+                                                            <div style="width:190px">
+                                                                <input type="text" id="name" class="form-control" placeholder="Max Price">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                                <div class="form-group mt-4">
+                                                    <div class="col" style="margin-top:5px">
+                                                        <a href="#" class="btn btn-danger btn-block glyphicon glyphicon-filter" role="button"> Filter</a>
+                                                    </div>
+                                                </div>
+                                                     
+                                                
+
+                                            </div>
+
+                                    </form>
+                                </div>
+                                @*<div class="panel-footer">
+                                    Not Registred? <a href="http://www.jquery2dotnet.com">Register here</a>
+                                </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- FIlter Form-->
+        <!--hr class="featurette-divider"-->
+
+
+
+
+        <!------------------>
+        <hr />
+        
+        
+
+        <!-- Marketing messaging and featurettes
+        ================================================== -->
+        <!-- Wrap the rest of the page in another container to center all the content. -->
+        <!-- /.row -->
+        <!-- START THE FEATURETTES -->
+        <hr />
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image img-fluid mx-auto" src="~/Images/PIS3611.jpg" alt="Generic placeholder image">
+            </div>
+        </div>
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            </div>
+            <div class="col-md-5 order-md-1">
+
+                <img class="featurette-image img-fluid mx-auto" src="~/Images/apartment-1.jpg" alt="Generic placeholder image">
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image img-fluid mx-auto" src="~/Images/villa-1.jpg" alt="Generic placeholder image">
+            </div>
+        </div>
+        <!---        cắt dòng             <hr class="featurette-divider">   bc0  -â>
+
+        <!-- /END THE FEATURETTES -->
+        <!-- /.container -->
+        <!-- FOOTER -->
+
+    </main>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="~/Scripts/slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="~/Scripts/jquery-1.10.2.min.js"><\/script>')</script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="~/Scripts/holder.min.js"></script>
+
+
+</body>
+
+</html>
+
+
+
