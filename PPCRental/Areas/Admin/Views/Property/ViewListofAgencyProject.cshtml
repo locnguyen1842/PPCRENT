@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "ViewListofAgencyProject";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout .cshtml";
 }
 
 <!DOCTYPE html>
@@ -76,6 +76,7 @@
                                     <th>Address</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
+                                    <th></th>
                                 </tr>
                             </thead
 +>
@@ -85,10 +86,13 @@
                                     <tr>
                                         <td>@item.USER.Email</td>
                                         <td>@item.PropertyName</td>
-                                        <td>@item.Avatar</td>
+                                        <td><img src="~/Images/@item.Avatar" height="100" width="100"/></td>
                                         <td>@item.DISTRICT.DistrictName, @item.WARD.WardName, @item.STREET.StreetName</td>
                                         <td>@item.PropertyName</td>
                                         <td>@item.PropertyName</td>
+                                        <td>@Html.ActionLink("Edit","Edit",new { id = item.ID })  
+                                            @Html.ActionLink("Delete","Delete",new { id = item.ID })
+                                        </td>
                                     </tr>
 
 
@@ -135,6 +139,22 @@
             });
         });
     </script>
+        
+    @*@section <script>
+        $('.delete-link').click(function (e) {
+            var a_href = $(this).attr('href'); /* Lấy giá trị của thuộc tính href */
+            e.preventDefault(); /* Không thực hiện action mặc định */
+            $.ajax({ /* Gửi request lên server */
+                url: a_href, /* Nội dung trong Delete.cshtml cụ thể là deleteModal div được server trả về */
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) { /* Sau khi nhận được giá */
+                    $('.body-content').prepend(data); /* body-content div (định nghĩa trong _Layout.cshtml) sẽ thêm deleteModal div vào dưới cùng */
+                    $('#deleteModal').modal('show'); /* Hiển thị deleteModal div dưới kiểu modal */
+                }
+            });
+        });
+    </script>*@
 
 </body>
 

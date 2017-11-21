@@ -49,5 +49,26 @@ namespace PPCRental.Areas.Admin.Controllers
             product.Updated_at = DateTime.Now;
             return RedirectToAction("Index");
         }
-	}
+        public ActionResult Delete(int? id)
+        {
+            
+            PROPERTY property = model.PROPERTies.Find(id);
+            if (property == null)
+            {
+                return HttpNotFound();
+            }
+            return View(property);
+        }
+
+        // POST: /Project/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            PROPERTY property = model.PROPERTies.Find(id);
+            model.PROPERTies.Remove(property);
+            model.SaveChanges();
+            return RedirectToAction("Index");
+        }
+    }
 }
