@@ -20,6 +20,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,13 +41,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -187,14 +191,13 @@
     <Content Include="Content\bootstrap1.min.css" />
     <Content Include="Content\carousel.css" />
     <Content Include="Content\dataTables.bootstrap.css" />
-    <Content Include="Content\dataTables.bootstrap.min.css" />
     <Content Include="Content\dataTables.responsive.css" />
-    <Content Include="Content\dataTables1.bootstrap.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\index.css" />
     <Content Include="Content\metisMenu.min.css" />
     <Content Include="Content\morris.css" />
     <Content Include="Content\sb-admin-2.css" />
+    <Content Include="dataTables.bootstrap.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -242,7 +245,7 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\Property\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Property\ViewListofAgencyProject.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_AdminLayout .cshtml" />
+    <Content Include="Areas\Admin\Views\Property\Delete.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap1.js" />
     <Content Include="Scripts\bootstrap1.min.js" />
@@ -290,6 +293,7 @@
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Project\Filter.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
