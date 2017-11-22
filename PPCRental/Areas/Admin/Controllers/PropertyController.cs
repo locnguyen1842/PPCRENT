@@ -24,7 +24,13 @@ namespace PPCRental.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+
             var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
+            ViewBag.ptype = model.PROPERTY_TYPE.OrderByDescending(x => x.ID).ToList();
+            ViewBag.ward = model.WARDs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.district = model.DISTRICTs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.street = model.STREETs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.status = model.PROJECT_STATUS.OrderByDescending(x => x.ID).ToList();
             return View(product);
         }
         [HttpPost]
