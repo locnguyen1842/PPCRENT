@@ -65,10 +65,10 @@
                                 <label for="location1" class="control-label">District</label>
                                 
                                 <select class="form-control" name="" id="location1">
-                                    <option value="All">All ares</option>
+                                    <option value="99">All ares</option>
                                     @foreach (var item in lstDistrict){
                                     if(@item.ID <=54  &&item.ID >=31){
-                                    <option value="@item.DistrictName">@item.DistrictName</option>
+                                    <option value="@item.ID">@item.DistrictName</option>
                                     }
                                     }
                                     
@@ -78,7 +78,7 @@
                             <div class="form-group">
                                 <label for="type1" class="control-label">Type</label>
                                 <select class="form-control" name="" id="location1">
-                                    <option value="All">All Type</option>
+                                    <option value="99">All Type</option>
                                     @foreach (var item in lstPType)
                                     {
                                        

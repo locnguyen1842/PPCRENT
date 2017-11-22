@@ -2,16 +2,14 @@
 
 @{
     ViewBag.Title = "ViewListofAgencyProject";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-}
-
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout .cshtml";
+    }
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -38,7 +36,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <
+    
 
 </head>
 
@@ -65,17 +63,18 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-
+                        
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
 
-                                    <th>Agency</th>
                                     <th>Property Name</th>
+                                    <th>Agency</th>
                                     <th>Avatar</th>
                                     <th>Address</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead
 +>
@@ -83,12 +82,17 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr>
+                                        <td>@item.PropertyName</td>
                                         <td>@item.USER.Email</td>
-                                        <td>@item.PropertyName</td>
-                                        <td>@item.Avatar</td>
+                                        <td><img src="~/Images/@item.Avatar" width="100px"/></td>
                                         <td>@item.DISTRICT.DistrictName, @item.WARD.WardName, @item.STREET.StreetName</td>
-                                        <td>@item.PropertyName</td>
-                                        <td>@item.PropertyName</td>
+                                        <td>@item.Created_at</td>
+                                        <td>@item.Updated_at</td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.ID})
+                                            @Html.ActionLink("Details", "Details", new { id = item.ID })
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                        </td>
                                     </tr>
 
 
@@ -116,24 +120,28 @@
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="~/Scripts/bootstrap1.min.js"></script>
+    <script src="~/Scripts/bootstrap1.min.js"></script> 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="~/Scripts/metisMenu.min.js"></script>
     <!-- DataTables JavaScript -->
-    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+
     <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
+    
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/dataTables.responsive.js"></script>
 
     <!-- Custom Theme JavaScript -->    
     <script src="~/Scripts/sb-admin-2.js"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
-        $(document).ready(function () {
+        $(document).ready(function ($) {
             $('#dataTables-example').DataTable({
                 responsive: true
             });
         });
+        
     </script>
 
 </body>

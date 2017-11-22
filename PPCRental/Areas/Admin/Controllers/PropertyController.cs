@@ -24,8 +24,17 @@ namespace PPCRental.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
-            return View(product);
+            List<object> myModel = new List<object>();
+            myModel.Add(model.PROPERTies.ToList());
+            myModel.Add(model.DISTRICTs.ToList());
+            myModel.Add(model.PROPERTY_TYPE.ToList());
+            myModel.Add(model.PROPERTY_FEATURE.ToList());
+            myModel.Add(model.WARDs.ToList());
+            myModel.Add(model.STREETs.ToList());
+            myModel.Add(model.PROJECT_STATUS.ToList());
+            //var properties = db.PROPERTies.Include(p => p.DISTRICT).Include(p => p.PROJECT_STATUS).Include(p => p.PROPERTY_TYPE).Include(p => p.STREET).Include(p => p.USER).Include(p => p.USER1).Include(p => p.WARD);
+            return View(myModel);
+
         }
         [HttpPost]
         public ActionResult Edit(int id, PROPERTY p)
@@ -49,5 +58,7 @@ namespace PPCRental.Areas.Admin.Controllers
             product.Updated_at = DateTime.Now;
             return RedirectToAction("Index");
         }
+
+        
 	}
 }

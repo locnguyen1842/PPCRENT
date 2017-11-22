@@ -187,13 +187,14 @@
     <Content Include="Content\bootstrap1.min.css" />
     <Content Include="Content\carousel.css" />
     <Content Include="Content\dataTables.bootstrap.css" />
+    <Content Include="Content\dataTables.bootstrap.min.css" />
     <Content Include="Content\dataTables.responsive.css" />
+    <Content Include="Content\dataTables1.bootstrap.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\index.css" />
     <Content Include="Content\metisMenu.min.css" />
     <Content Include="Content\morris.css" />
     <Content Include="Content\sb-admin-2.css" />
-    <Content Include="dataTables.bootstrap.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -241,6 +242,7 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\Property\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Property\ViewListofAgencyProject.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminLayout .cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap1.js" />
     <Content Include="Scripts\bootstrap1.min.js" />
@@ -288,7 +290,6 @@
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Project\Filter.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
