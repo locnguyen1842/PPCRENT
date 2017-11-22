@@ -119,7 +119,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -246,6 +245,7 @@
     <Content Include="Areas\Admin\Views\Property\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Property\ViewListofAgencyProject.cshtml" />
     <Content Include="Areas\Admin\Views\Property\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap1.js" />
     <Content Include="Scripts\bootstrap1.min.js" />

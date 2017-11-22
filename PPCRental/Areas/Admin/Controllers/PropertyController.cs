@@ -27,9 +27,9 @@ namespace PPCRental.Areas.Admin.Controllers
 
             var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
             ViewBag.ptype = model.PROPERTY_TYPE.OrderByDescending(x => x.ID).ToList();
-            ViewBag.ward = model.WARDs.OrderByDescending(x => x.ID).ToList();
-            ViewBag.district = model.DISTRICTs.OrderByDescending(x => x.ID).ToList();
-            ViewBag.street = model.STREETs.OrderByDescending(x => x.ID).ToList();
+            ViewBag.ward = model.WARDs.OrderByDescending(x => x.ID).Where(y => y.District_ID >= 31 && y.District_ID<=54).ToList();
+            ViewBag.district = model.DISTRICTs.OrderByDescending(x => x.ID).Where(y => y.ID >= 31 && y.ID <= 54).ToList();
+            ViewBag.street = model.STREETs.OrderByDescending(x => x.ID).Where(y=> y.District_ID >= 31 && y.District_ID <= 54).ToList();
             ViewBag.status = model.PROJECT_STATUS.OrderByDescending(x => x.ID).ToList();
             return View(product);
         }
@@ -53,7 +53,8 @@ namespace PPCRental.Areas.Admin.Controllers
             product.BathRoom = p.BathRoom;
             product.PackingPlace = p.PackingPlace;
             product.Updated_at = DateTime.Now;
-            return RedirectToAction("Index");
+            model.SaveChanges();
+            return RedirectToAction("ViewListofAgencyProject");
         }
         public ActionResult Delete(int? id)
         {
