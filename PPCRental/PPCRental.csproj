@@ -246,6 +246,7 @@
     <Content Include="Areas\Admin\Views\Property\ViewListofAgencyProject.cshtml" />
     <Content Include="Areas\Admin\Views\Property\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\Property\Post.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap1.js" />
     <Content Include="Scripts\bootstrap1.min.js" />

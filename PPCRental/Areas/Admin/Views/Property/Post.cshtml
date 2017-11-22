@@ -1,14 +1,13 @@
 ﻿@model PPCRental.Models.PROPERTY
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Post";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 
 }
 
-
 <h2>Edit</h2>
-@using (Html.BeginForm("Edit", "Property", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Post", "Property", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 

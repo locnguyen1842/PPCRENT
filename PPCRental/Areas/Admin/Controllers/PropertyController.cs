@@ -122,5 +122,75 @@ namespace PPCRental.Areas.Admin.Controllers
             model.SaveChanges();
             return RedirectToAction("ViewListofAgencyProject");
         }
+        public ActionResult Post(int id)
+        {
+
+            var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
+            ReadList();
+
+            return View(product);
+        }
+        
+        [HttpPost]
+        public ActionResult Post(PROPERTY p)
+        {
+            //img
+            ReadList();
+            var en = model.PROPERTies.Find(p.ID);
+
+
+            if (p.AvatarUpload == null)
+            {
+                p.Avatar = en.Avatar;
+                en.Avatar = p.Avatar;
+                en.PROPERTY_TYPE = p.PROPERTY_TYPE;
+                en.PropertyName = p.PropertyName;
+                en.Images = p.Images;
+                en.PropertyType_ID = p.PropertyType_ID;
+                en.Content = p.Content;
+                en.Street_ID = p.Street_ID;
+                en.Ward_ID = p.Ward_ID;
+                en.District_ID = p.District_ID;
+                en.Price = p.Price;
+                en.UnitPrice = p.UnitPrice;
+                en.Area = p.Area;
+                en.BedRoom = p.BedRoom;
+                en.BathRoom = p.BathRoom;
+                en.PackingPlace = p.PackingPlace;
+                en.Updated_at = DateTime.Now;
+                model.SaveChanges();
+
+            }
+            else
+            {
+                string filename = Path.GetFileNameWithoutExtension(p.AvatarUpload.FileName);
+                string extension = Path.GetExtension(p.AvatarUpload.FileName);
+                filename = filename + DateTime.Now.ToString("yymmssff") + extension;
+                p.Avatar = filename;
+                string s = p.Avatar;
+                filename = Path.Combine(Server.MapPath("~/Images"), filename);
+                p.AvatarUpload.SaveAs(filename);
+
+                en.PROPERTY_TYPE = p.PROPERTY_TYPE;
+                en.PropertyName = p.PropertyName;
+                en.Avatar = s;
+                en.Images = p.Images;
+                en.PropertyType_ID = p.PropertyType_ID;
+                en.Content = p.Content;
+                en.Street_ID = p.Street_ID;
+                en.Ward_ID = p.Ward_ID;
+                en.District_ID = p.District_ID;
+                en.Price = p.Price;
+                en.UnitPrice = p.UnitPrice;
+                en.Area = p.Area;
+                en.BedRoom = p.BedRoom;
+                en.BathRoom = p.BathRoom;
+                en.PackingPlace = p.PackingPlace;
+                en.Updated_at = DateTime.Now;
+                model.SaveChanges();
+
+            }
+            return RedirectToAction("ViewListofAgencyProject");
+        }
     }
 }
