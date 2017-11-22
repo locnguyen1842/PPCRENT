@@ -38,7 +38,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <
+    
 
 </head>
 
@@ -47,16 +47,16 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        
 
-            <div class="row">
-                
-                <div class="col-lg-12">
-                    <h1 class="page-header">Tables</h1>
-                </div>
-                <!-- /.col-lg-12 -->
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h1 class="page-header">Tables</h1>
             </div>
-            <!-- /.row -->
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -78,20 +78,24 @@
                                     <th>Updated at</th>
                                     <th>Action</th>
                                 </tr>
-                            </thead
-+>
+                            </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
                                     <tr>
                                         <td>@item.USER.Email</td>
                                         <td>@item.PropertyName</td>
-                                        <td><img src="~/Images/@item.Avatar" height="100" width="100"/></td>
+                                        <td>
+                                            <img src="~/Images/@item.Avatar"  width="100px"/>
+                                        </td>
+                                                                   
+                                        
                                         <td>@item.DISTRICT.DistrictName, @item.WARD.WardName, @item.STREET.StreetName</td>
                                         <td>@item.Created_at</td>
                                         <td>@item.Updated_at</td>
-                                        <td>@Html.ActionLink("Edit","Edit",new { id = item.ID })  
-                                            @Html.ActionLink("Delete","Delete",new { id = item.ID })
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                                         </td>
                                     </tr>
 
@@ -111,12 +115,11 @@
         </div>
 
 
-            <!-- /.row -->
-            
-        </div>
+        <!-- /.row -->
 
-        <!-- /#page-wrapper -->
+    </div>
 
+    <!-- /#page-wrapper -->
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="~/Scripts/jquery.min.js"></script>
@@ -129,32 +132,32 @@
     <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
     <script src="~/Scripts/dataTables.responsive.js"></script>
 
-    <!-- Custom Theme JavaScript -->    
+    <!-- Custom Theme JavaScript -->
     <script src="~/Scripts/sb-admin-2.js"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
-        $(document).ready(function () {
+        $(document).ready(function ($) {
             $('#dataTables-example').DataTable({
                 responsive: true
             });
         });
     </script>
-        
+
     @*@section <script>
-        $('.delete-link').click(function (e) {
-            var a_href = $(this).attr('href'); /* Lấy giá trị của thuộc tính href */
-            e.preventDefault(); /* Không thực hiện action mặc định */
-            $.ajax({ /* Gửi request lên server */
-                url: a_href, /* Nội dung trong Delete.cshtml cụ thể là deleteModal div được server trả về */
-                type: 'GET',
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) { /* Sau khi nhận được giá */
-                    $('.body-content').prepend(data); /* body-content div (định nghĩa trong _Layout.cshtml) sẽ thêm deleteModal div vào dưới cùng */
-                    $('#deleteModal').modal('show'); /* Hiển thị deleteModal div dưới kiểu modal */
-                }
+            $('.delete-link').click(function (e) {
+                var a_href = $(this).attr('href'); /* Lấy giá trị của thuộc tính href */
+                e.preventDefault(); /* Không thực hiện action mặc định */
+                $.ajax({ /* Gửi request lên server */
+                    url: a_href, /* Nội dung trong Delete.cshtml cụ thể là deleteModal div được server trả về */
+                    type: 'GET',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) { /* Sau khi nhận được giá */
+                        $('.body-content').prepend(data); /* body-content div (định nghĩa trong _Layout.cshtml) sẽ thêm deleteModal div vào dưới cùng */
+                        $('#deleteModal').modal('show'); /* Hiển thị deleteModal div dưới kiểu modal */
+                    }
+                });
             });
-        });
-    </script>*@
+        </script>*@
 
 </body>
 

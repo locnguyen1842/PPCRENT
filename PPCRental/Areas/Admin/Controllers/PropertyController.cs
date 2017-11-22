@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PPCRental.Models;
+using System.IO;
 
 namespace PPCRental.Areas.Admin.Controllers
 {
@@ -26,34 +27,78 @@ namespace PPCRental.Areas.Admin.Controllers
         {
 
             var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
-            ViewBag.ptype = model.PROPERTY_TYPE.OrderByDescending(x => x.ID).ToList();
-            ViewBag.ward = model.WARDs.OrderByDescending(x => x.ID).Where(y => y.District_ID >= 31 && y.District_ID<=54).ToList();
-            ViewBag.district = model.DISTRICTs.OrderByDescending(x => x.ID).Where(y => y.ID >= 31 && y.ID <= 54).ToList();
-            ViewBag.street = model.STREETs.OrderByDescending(x => x.ID).Where(y=> y.District_ID >= 31 && y.District_ID <= 54).ToList();
-            ViewBag.status = model.PROJECT_STATUS.OrderByDescending(x => x.ID).ToList();
+            ReadList();            
+
             return View(product);
         }
-        [HttpPost]
-        public ActionResult Edit(int id, PROPERTY p)
+        public void ReadList()
         {
-            var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
-            product.PROPERTY_TYPE = p.PROPERTY_TYPE;
-            product.PropertyName = p.PropertyName;
-            product.Avatar = p.Avatar;
-            product.Images = p.Images;
-            product.PropertyType_ID = p.PropertyType_ID;
-            product.Content = p.Content;
-            product.Street_ID = p.Street_ID;
-            product.Ward_ID = p.Ward_ID;
-            product.District_ID = p.District_ID;
-            product.Price = p.Price;
-            product.UnitPrice = p.UnitPrice;
-            product.Area = p.Area;
-            product.BedRoom = p.BedRoom;
-            product.BathRoom = p.BathRoom;
-            product.PackingPlace = p.PackingPlace;
-            product.Updated_at = DateTime.Now;
-            model.SaveChanges();
+            ViewBag.ptype = model.PROPERTY_TYPE.OrderByDescending(x => x.ID).ToList();
+            ViewBag.ward = model.WARDs.OrderByDescending(x => x.ID).Where(y => y.District_ID >= 31 && y.District_ID <= 54).ToList();
+            ViewBag.district = model.DISTRICTs.OrderByDescending(x => x.ID).Where(y => y.ID >= 31 && y.ID <= 54).ToList();
+            ViewBag.street = model.STREETs.OrderByDescending(x => x.ID).Where(y => y.District_ID >= 31 && y.District_ID <= 54).ToList();
+            ViewBag.status = model.PROJECT_STATUS.OrderByDescending(x => x.ID).ToList();
+
+        }
+        [HttpPost]
+        public ActionResult Edit( PROPERTY p)
+        {
+            //img
+            ReadList();
+            var en = model.PROPERTies.Find(p.ID);
+            
+            
+            if (p.AvatarUpload == null)
+            {
+                p.Avatar = en.Avatar;
+                en.Avatar = p.Avatar;
+                en.PROPERTY_TYPE = p.PROPERTY_TYPE;
+                en.PropertyName = p.PropertyName;
+                en.Images = p.Images;
+                en.PropertyType_ID = p.PropertyType_ID;
+                en.Content = p.Content;
+                en.Street_ID = p.Street_ID;
+                en.Ward_ID = p.Ward_ID;
+                en.District_ID = p.District_ID;
+                en.Price = p.Price;
+                en.UnitPrice = p.UnitPrice;
+                en.Area = p.Area;
+                en.BedRoom = p.BedRoom;
+                en.BathRoom = p.BathRoom;
+                en.PackingPlace = p.PackingPlace;
+                en.Updated_at = DateTime.Now;
+                model.SaveChanges();
+            
+            }
+            else
+            {
+                string filename = Path.GetFileNameWithoutExtension(p.AvatarUpload.FileName);
+                string extension = Path.GetExtension(p.AvatarUpload.FileName);
+                filename = filename + DateTime.Now.ToString("yymmssff") + extension;
+                p.Avatar = filename;
+                string s = p.Avatar;
+                filename = Path.Combine(Server.MapPath("~/Images"), filename);
+                p.AvatarUpload.SaveAs(filename);
+
+                en.PROPERTY_TYPE = p.PROPERTY_TYPE;
+                en.PropertyName = p.PropertyName;
+                en.Avatar = s;
+                en.Images = p.Images;
+                en.PropertyType_ID = p.PropertyType_ID;
+                en.Content = p.Content;
+                en.Street_ID = p.Street_ID;
+                en.Ward_ID = p.Ward_ID;
+                en.District_ID = p.District_ID;
+                en.Price = p.Price;
+                en.UnitPrice = p.UnitPrice;
+                en.Area = p.Area;
+                en.BedRoom = p.BedRoom;
+                en.BathRoom = p.BathRoom;
+                en.PackingPlace = p.PackingPlace;
+                en.Updated_at = DateTime.Now;
+                model.SaveChanges();
+            
+            }
             return RedirectToAction("ViewListofAgencyProject");
         }
         public ActionResult Delete(int? id)
@@ -75,7 +120,7 @@ namespace PPCRental.Areas.Admin.Controllers
             PROPERTY property = model.PROPERTies.Find(id);
             model.PROPERTies.Remove(property);
             model.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ViewListofAgencyProject");
         }
     }
 }
