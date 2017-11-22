@@ -46,39 +46,27 @@ namespace PPCRental.Areas.Admin.Controllers
             //img
             ReadList();
             var en = model.PROPERTies.Find(p.ID);
+            string filename;
+            string extension;
+            string s;
             
-            
-            if (p.AvatarUpload == null)
+            if (p.AvatarUpload != null)
             {
-                p.Avatar = en.Avatar;
-                en.Avatar = p.Avatar;
-                en.PROPERTY_TYPE = p.PROPERTY_TYPE;
-                en.PropertyName = p.PropertyName;
-                en.Images = p.Images;
-                en.PropertyType_ID = p.PropertyType_ID;
-                en.Content = p.Content;
-                en.Street_ID = p.Street_ID;
-                en.Ward_ID = p.Ward_ID;
-                en.District_ID = p.District_ID;
-                en.Price = p.Price;
-                en.UnitPrice = p.UnitPrice;
-                en.Area = p.Area;
-                en.BedRoom = p.BedRoom;
-                en.BathRoom = p.BathRoom;
-                en.PackingPlace = p.PackingPlace;
-                en.Updated_at = DateTime.Now;
-                model.SaveChanges();
-            
+                filename = Path.GetFileNameWithoutExtension(p.AvatarUpload.FileName);
+                extension = Path.GetExtension(p.AvatarUpload.FileName);
+                filename = filename + DateTime.Now.ToString("yymmssff") + extension;
+                p.Avatar = filename;
+                s = p.Avatar;
+                filename = Path.Combine(Server.MapPath("~/Images"), filename);
+                p.AvatarUpload.SaveAs(filename);
+                    
             }
             else
             {
-                string filename = Path.GetFileNameWithoutExtension(p.AvatarUpload.FileName);
-                string extension = Path.GetExtension(p.AvatarUpload.FileName);
-                filename = filename + DateTime.Now.ToString("yymmssff") + extension;
-                p.Avatar = filename;
-                string s = p.Avatar;
-                filename = Path.Combine(Server.MapPath("~/Images"), filename);
-                p.AvatarUpload.SaveAs(filename);
+                s = en.Avatar;
+                
+            }
+                
 
                 en.PROPERTY_TYPE = p.PROPERTY_TYPE;
                 en.PropertyName = p.PropertyName;
@@ -98,7 +86,7 @@ namespace PPCRental.Areas.Admin.Controllers
                 en.Updated_at = DateTime.Now;
                 model.SaveChanges();
             
-            }
+            
             return RedirectToAction("ViewListofAgencyProject");
         }
         public ActionResult Delete(int? id)
@@ -121,6 +109,14 @@ namespace PPCRental.Areas.Admin.Controllers
             model.PROPERTies.Remove(property);
             model.SaveChanges();
             return RedirectToAction("ViewListofAgencyProject");
+        }
+
+        public JsonResult GetStreet(int District_id)
+        {
+            return Json(
+            model.STREETs.Where(s => s.District_ID == District_id )
+            .Select(s => new { id = s.ID, text = s.StreetName }).ToList(),
+            JsonRequestBehavior.AllowGet);
         }
     }
 }
