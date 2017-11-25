@@ -96,8 +96,8 @@
                                         <td>@item.Created_at</td>
                                         <td>@item.Updated_at</td>
                                         <td>
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                            @Html.ActionLink("Edit","Edit", new { id = item.ID }, new { @class = "fa fa-pencil-square-o" })
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "fa fa-trash" })
                                         </td>
                                     </tr>
 

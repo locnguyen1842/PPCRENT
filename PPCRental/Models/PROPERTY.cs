@@ -52,5 +52,7 @@ namespace PPCRental.Models
         public virtual WARD WARD { get; set; }
         public HttpPostedFileBase AvatarUpload { get; set; }
         public HttpPostedFileBase ImagesUpload { get; set; }
+
+        public IEnumerable<HttpPostedFileBase> Up { get; set; }
     }
 }

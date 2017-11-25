@@ -43,13 +43,13 @@ namespace PPCRental.Controllers
         // GET: /Project/Create
         public ActionResult Create()
         {
-            ViewBag.District_ID = new SelectList(db.DISTRICTs, "ID", "DistrictName");
+            ViewBag.District_ID = new SelectList(db.DISTRICTs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "DistrictName");
             ViewBag.Status_ID = new SelectList(db.PROJECT_STATUS, "ID", "Status_Name");
             ViewBag.PropertyType_ID = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
-            ViewBag.Street_ID = new SelectList(db.STREETs, "ID", "StreetName");
+            ViewBag.Street_ID = new SelectList(db.STREETs.Where(y => y.District_ID >= 31 && y.District_ID <= 54), "ID", "StreetName");
             ViewBag.UserID = new SelectList(db.USERs, "ID", "Email");
             ViewBag.Sale_ID = new SelectList(db.USERs, "ID", "Email");
-            ViewBag.Ward_ID = new SelectList(db.WARDs, "ID", "WardName");
+            ViewBag.Ward_ID = new SelectList(db.WARDs.Where(y => y.District_ID >= 31 && y.District_ID <= 54), "ID", "WardName");
             return View();
         }
 
@@ -58,15 +58,18 @@ namespace PPCRental.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ID,PropertyName,Avatar,Images,PropertyType_ID,Content,Street_ID,Ward_ID,District_ID,Price,UnitPrice,Area,BedRoom,BathRoom,PackingPlace,UserID,Created_at,Create_post,Status_ID,Note,Updated_at,Sale_ID")] PROPERTY property)
+        public ActionResult Create( PROPERTY property)
         {
+            property.Created_at = DateTime.Now;
+            
             if (ModelState.IsValid)
             {
+                
                 db.PROPERTies.Add(property);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            
             ViewBag.District_ID = new SelectList(db.DISTRICTs, "ID", "DistrictName", property.District_ID);
             ViewBag.Status_ID = new SelectList(db.PROJECT_STATUS, "ID", "Status_Name", property.Status_ID);
             ViewBag.PropertyType_ID = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType", property.PropertyType_ID);
@@ -168,20 +171,10 @@ namespace PPCRental.Controllers
             {
                 project = project.Where(p => p.PropertyType_ID == type).ToList();
             }
-            if (!String.IsNullOrEmpty(min.ToString()))
-            {
-                min = 0;
-                project = project.Where(p => p.Price >= min).ToList();
-            }
-            if (max.ToString() == "")
-            {
-                max = 0;
-                project = project.Where(p => p.Price >= min).ToList();
-            }
+            
             return View(project);
 
         }
-
-        
+            
     }
 }
