@@ -3,205 +3,252 @@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+
 }
 
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>PROPERTY</h4>
+
+
+    <div class="form-horizontal" style="background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+                                        background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+                                        background-attachment: fixed;
+                                        background-repeat: no-repeat;">
+
         <hr />
         @Html.ValidationSummary(true)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ID, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ID)
-                @Html.ValidationMessageFor(model => model.ID)
-            </div>
+        <div>
+            <h4 class="col-lg-offset-0">PROPERTY</h4>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PropertyName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PropertyName)
-                @Html.ValidationMessageFor(model => model.PropertyName)
+        <form>
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.ID, new { @class = " control-label col-md-4 " })*@
+                <label class="col-md-4 control-label">Id</label>
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-heart-empty"></i></span>
+                    <input name="Id" class="form-control" type="text">
+                    @*@Html.EditorFor(model => model.ID)*@
+                    @Html.ValidationMessageFor(model => model.ID)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Avatar, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Avatar)
-                @Html.ValidationMessageFor(model => model.Avatar)
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.PropertyName, new { @class = "contrl-label col-md-4" })*@
+                <label class=" col-md-4 control-label">PropertyName</label>
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                    <input name="property_name" class="form-control" type="text">
+                    @*@Html.EditorFor(model => model.PropertyName)*@
+                    @Html.ValidationMessageFor(model => model.PropertyName)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Images, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Images)
-                @Html.ValidationMessageFor(model => model.Images)
+            <div class="form-group" @*style="float:right;margin-right:150px"*@>
+                @Html.LabelFor(model => model.Avatar, new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Avatar)
+                    @Html.ValidationMessageFor(model => model.Avatar)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PropertyType_ID, "PropertyType_ID", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PropertyType_ID", String.Empty)
-                @Html.ValidationMessageFor(model => model.PropertyType_ID)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Images, new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Images)
+                    @Html.ValidationMessageFor(model => model.Images)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Content, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Content)
-                @Html.ValidationMessageFor(model => model.Content)
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyType_ID, "PropertyType_ID", new { @class = "control-label col-md-4" })
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                    @Html.DropDownList("PropertyType_ID", String.Empty)
+                    @Html.ValidationMessageFor(model => model.PropertyType_ID)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Street_ID, "Street_ID", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Street_ID", String.Empty)
-                @Html.ValidationMessageFor(model => model.Street_ID)
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Content, new { @class = "control-label col-md-4" })*@
+                <label class=" col-md-4 control-label">Content</label>
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-pencil"></i></span>
+                    <textarea class="form-control" name="content" placeholder="Project Description"></textarea>
+                    @Html.ValidationMessageFor(model => model.Content)
+                </div>
             </div>
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.District_ID, "District_ID", new { @class = "control-label col-md-4" })
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                    @Html.DropDownList("District_ID", String.Empty)
+                    @Html.ValidationMessageFor(model => model.Street_ID)
+                </div>
+            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ward_ID, "Ward_ID", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Ward_ID", String.Empty)
-                @Html.ValidationMessageFor(model => model.Ward_ID)
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.District_ID, "District_ID", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("District_ID", String.Empty)
-                @Html.ValidationMessageFor(model => model.District_ID)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ward_ID, "Ward_ID", new { @class = "control-label col-md-4" })
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                    @Html.DropDownList("Ward_ID", String.Empty)
+                    @Html.ValidationMessageFor(model => model.Ward_ID)
+                </div>
             </div>
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Street_ID, "Street_ID", new { @class = "control-label col-md-4" })
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                    @Html.DropDownList("Street_ID", String.Empty)
+                    @Html.ValidationMessageFor(model => model.Street_ID)
+                </div>
+            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price)
-                @Html.ValidationMessageFor(model => model.Price)
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UnitPrice, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UnitPrice)
-                @Html.ValidationMessageFor(model => model.UnitPrice)
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Area, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Area)
-                @Html.ValidationMessageFor(model => model.Area)
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Price, new { @class = "control-label col-md-4" })*@
+                <label class=" col-md-4 control-label">PropertyName</label>
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-usd"></i></span>
+                    <input name="Price" class="form-control" type="text">
+                    @Html.ValidationMessageFor(model => model.Price)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.BedRoom, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BedRoom)
-                @Html.ValidationMessageFor(model => model.BedRoom)
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.UnitPrice, new { @class = "control-label col-md-4" })*@
+                <label class=" col-md-4 control-label">Unit Price</label>
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-usd"></i></span>
+                    <input name="UnitPrice" class="form-control" type="text">
+                    @Html.ValidationMessageFor(model => model.UnitPrice)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.BathRoom, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BathRoom)
-                @Html.ValidationMessageFor(model => model.BathRoom)
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Area, new { @class = "control-label col-md-4" })*@
+                <label class=" col-md-4 control-label">Area</label>
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                    <input name="Area" class="form-control" type="text">
+                    @Html.ValidationMessageFor(model => model.Area)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PackingPlace, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PackingPlace)
-                @Html.ValidationMessageFor(model => model.PackingPlace)
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.BedRoom, new { @class = "control-label col-md-4" })*@
+                <label class=" col-md-4 control-label">BedRoom</label>
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                    <input name="Bed" class="form-control" type="text">
+                    @Html.ValidationMessageFor(model => model.BedRoom)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserID, "UserID", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("UserID", String.Empty)
-                @Html.ValidationMessageFor(model => model.UserID)
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.BathRoom, new { @class = "control-label col-md-4" })*@
+                <label class=" col-md-4 control-label">BathRoom</label>
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                    <input name="property_name" class="form-control" type="text">
+                    @Html.ValidationMessageFor(model => model.BathRoom)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Created_at, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Created_at)
-                @Html.ValidationMessageFor(model => model.Created_at)
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.PackingPlace, new { @class = "control-label col-md-4" })*@
+                <label class=" col-md-4 control-label">Packing Place</label>
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-heart-empty"></i></span>
+                    <input name="packing_place" class="form-control" type="text">
+                    @Html.ValidationMessageFor(model => model.PackingPlace)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Create_post, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Create_post)
-                @Html.ValidationMessageFor(model => model.Create_post)
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserID, "UserID", new { @class = "control-label col-md-4" })
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                    @Html.DropDownList("UserID", String.Empty)
+                    @Html.ValidationMessageFor(model => model.UserID)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Status_ID, "Status_ID", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Status_ID", String.Empty)
-                @Html.ValidationMessageFor(model => model.Status_ID)
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Created_at, new { @class = "control-label col-md-4" })*@
+                <label class=" col-md-4 control-label">Created at</label>
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-calendar"></i></span>
+                    <input name="create_at" class="form-control" type="text">
+                    @Html.ValidationMessageFor(model => model.Created_at)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Note, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Note)
-                @Html.ValidationMessageFor(model => model.Note)
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Create_post, new { @class = "control-label col-md-4" })*@
+                <label class=" col-md-4 control-label">Create Post</label>
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-calendar"></i></span>
+                    <input name="create_post" class="form-control" type="text">
+                    @Html.ValidationMessageFor(model => model.Create_post)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Updated_at, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Updated_at)
-                @Html.ValidationMessageFor(model => model.Updated_at)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Status_ID, "Status_ID", new { @class = "control-label col-md-4" })
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                    @Html.DropDownList("Status_ID", String.Empty)
+                    @Html.ValidationMessageFor(model => model.Status_ID)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Sale_ID, "Sale_ID", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Sale_ID", String.Empty)
-                @Html.ValidationMessageFor(model => model.Sale_ID)
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Note, new { @class = "control-label col-md-4" })*@
+                <label class=" col-md-4 control-label">Note</label>
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-pencil"></i></span>
+                    <textarea class="form-control" name="comment" placeholder="Description Here"></textarea>
+                    @Html.ValidationMessageFor(model => model.Note)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Updated_at, new { @class = "control-label col-md-4" })*@
+                <label class=" col-md-4 control-label">Update at</label>
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-calendar"></i></span>
+                    <input name="update_at" class="form-control" type="text">
+                    @Html.ValidationMessageFor(model => model.Updated_at)
+                </div>
             </div>
-        </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Sale_ID, "Sale_ID", new { @class = "control-label col-md-4" })
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                    @Html.DropDownList("Sale_ID", String.Empty)
+                    @Html.ValidationMessageFor(model => model.Sale_ID)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-4">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </div>
+            </div>
+        </form>
     </div>
 }
 
-<div>
+<div class="col-md-1">
     @Html.ActionLink("Back to List", "Index")
 </div>
 
