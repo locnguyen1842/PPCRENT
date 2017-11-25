@@ -27,7 +27,7 @@ namespace PPCRental.Areas.Admin.Controllers
         {
 
             var product = model.PROPERTies.FirstOrDefault(x => x.ID == id);
-            ReadList();            
+            ReadList();
 
             return View(product);
         }
@@ -41,15 +41,46 @@ namespace PPCRental.Areas.Admin.Controllers
 
         }
         [HttpPost]
-        public ActionResult Edit( PROPERTY p)
+        public ActionResult Edit(PROPERTY p)
         {
             //img
             ReadList();
-            var en = model.PROPERTies.Find(p.ID);
+
+            PROPERTY en;
+            string s;
+            string b;
+            AvatarU(p, out en, out s);
+            ImagesU(p, out en, out b);
+
+            en.PROPERTY_TYPE = p.PROPERTY_TYPE;
+            en.PropertyName = p.PropertyName;
+            en.Avatar = s;
+            en.Images = b;
+            en.PropertyType_ID = p.PropertyType_ID;
+            en.Content = p.Content;
+            en.Street_ID = p.Street_ID;
+            en.Ward_ID = p.Ward_ID;
+            en.District_ID = p.District_ID;
+            en.Price = p.Price;
+            en.UnitPrice = p.UnitPrice;
+            en.Area = p.Area;
+            en.BedRoom = p.BedRoom;
+            en.BathRoom = p.BathRoom;
+            en.PackingPlace = p.PackingPlace;
+            en.Updated_at = DateTime.Now;
+            model.SaveChanges();
+
+
+            return RedirectToAction("ViewListofAgencyProject");
+        }
+
+        private void AvatarU(PROPERTY p, out PROPERTY en, out string s)
+        {
+            en = model.PROPERTies.Find(p.ID);
             string filename;
             string extension;
-            string s;
-            
+
+
             if (p.AvatarUpload != null)
             {
                 filename = Path.GetFileNameWithoutExtension(p.AvatarUpload.FileName);
@@ -59,39 +90,54 @@ namespace PPCRental.Areas.Admin.Controllers
                 s = p.Avatar;
                 filename = Path.Combine(Server.MapPath("~/Images"), filename);
                 p.AvatarUpload.SaveAs(filename);
-            
+
             }
             else
             {
                 s = en.Avatar;
-                
-            }
-                
 
-                en.PROPERTY_TYPE = p.PROPERTY_TYPE;
-                en.PropertyName = p.PropertyName;
-                en.Avatar = s;
-                en.Images = p.Images;
-                en.PropertyType_ID = p.PropertyType_ID;
-                en.Content = p.Content;
-                en.Street_ID = p.Street_ID;
-                en.Ward_ID = p.Ward_ID;
-                en.District_ID = p.District_ID;
-                en.Price = p.Price;
-                en.UnitPrice = p.UnitPrice;
-                en.Area = p.Area;
-                en.BedRoom = p.BedRoom;
-                en.BathRoom = p.BathRoom;
-                en.PackingPlace = p.PackingPlace;
-                en.Updated_at = DateTime.Now;
-                model.SaveChanges();
-            
-            
-            return RedirectToAction("ViewListofAgencyProject");
+            }
         }
+        private void ImagesU(PROPERTY p, out PROPERTY en, out string s)
+        {
+            en = model.PROPERTies.Find(p.ID);
+            string filename;
+            string extension;
+            string b;
+            s = "";
+            
+            if (p.Up == null)
+            {
+                s = en.Images;
+
+            }
+
+            else
+            {
+
+                foreach (var file in p.Up)
+                {
+
+                    filename = Path.GetFileNameWithoutExtension(file.FileName);
+                    extension = Path.GetExtension(file.FileName);
+                    filename = filename + DateTime.Now.ToString("yymmssff") + extension;
+                    p.Images = filename;
+                    b = p.Images;
+                    s = string.Concat(s, b, ",");
+                    filename = Path.Combine(Server.MapPath("~/Images"), filename);
+                    file.SaveAs(filename);
+                }
+
+
+
+            }
+
+
+        }
+
         public ActionResult Delete(int? id)
         {
-            
+
             PROPERTY property = model.PROPERTies.Find(id);
             if (property == null)
             {
@@ -118,7 +164,7 @@ namespace PPCRental.Areas.Admin.Controllers
 
             return View(product);
         }
-        
+
         [HttpPost]
         public ActionResult Post(PROPERTY p)
         {
@@ -184,9 +230,10 @@ namespace PPCRental.Areas.Admin.Controllers
         public JsonResult GetStreet(int District_id)
         {
             return Json(
-            model.STREETs.Where(s => s.District_ID == District_id )
+            model.STREETs.Where(s => s.District_ID == District_id)
             .Select(s => new { id = s.ID, text = s.StreetName }).ToList(),
             JsonRequestBehavior.AllowGet);
         }
+
     }
 }
