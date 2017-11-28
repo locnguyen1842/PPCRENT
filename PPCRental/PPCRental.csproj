@@ -185,6 +185,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Background\advanced_search_active.png" />
+    <Content Include="Background\advanced_search_hover.png" />
+    <Content Include="Background\advanced_search_inactive.png" />
+    <Content Include="Background\calendar_icon.png" />
+    <Content Include="Background\close_menu_icon.png" />
+    <Content Include="Background\hamburger_icon.png" />
+    <Content Include="Background\hero.jpg" />
+    <Content Include="Background\hero_small.jpg" />
+    <Content Include="Background\logo.png" />
+    <Content Include="Background\property_1.jpg" />
+    <Content Include="Background\property_2.jpg" />
+    <Content Include="Background\property_3.jpg" />
+    <Content Include="Background\search_arrow.png" />
+    <Content Include="Background\social_media.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap1.css" />
@@ -194,12 +208,18 @@
     <Content Include="Content\dataTables.responsive.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\index.css" />
+    <Content Include="Content\main.css" />
     <Content Include="Content\metisMenu.min.css" />
     <Content Include="Content\morris.css" />
+    <Content Include="Content\reset.css" />
+    <Content Include="Content\responsive.css" />
     <Content Include="Content\sb-admin-2.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\lato-bold.svg" />
+    <Content Include="fonts\lato-regular.svg" />
+    <Content Include="fonts\p22_corinthia.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\apartment-1.jpg" />
@@ -247,6 +267,15 @@
     <Content Include="Areas\Admin\Views\Property\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Areas\Admin\Views\Property\Post.cshtml" />
+    <Content Include="fonts\lato-bold.eot" />
+    <Content Include="fonts\lato-bold.ttf" />
+    <Content Include="fonts\lato-bold.woff" />
+    <Content Include="fonts\lato-regular.eot" />
+    <Content Include="fonts\lato-regular.ttf" />
+    <Content Include="fonts\lato-regular.woff" />
+    <Content Include="fonts\p22_corinthia.eot" />
+    <Content Include="fonts\p22_corinthia.ttf" />
+    <Content Include="fonts\p22_corinthia.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap1.js" />
     <Content Include="Scripts\bootstrap1.min.js" />
