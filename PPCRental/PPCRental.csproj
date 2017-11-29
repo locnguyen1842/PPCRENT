@@ -173,9 +173,6 @@
     <Compile Include="Models\STREET.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\USER.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

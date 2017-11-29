@@ -25,7 +25,6 @@
         <AssociationConnector Association="PPCRentalModel.FK_PROPERTY_USER" ManuallyRouted="false" />
         <AssociationConnector Association="PPCRentalModel.FK_PROPERTY_USER1" ManuallyRouted="false" />
         <AssociationConnector Association="PPCRentalModel.FK_PROPERTY_WARD" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="PPCRentalModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
