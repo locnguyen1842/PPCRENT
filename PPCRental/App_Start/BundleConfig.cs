@@ -15,14 +15,19 @@ namespace PPCRental
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
-
+            
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap.css","~/Content/index.css","~/Content/carousel.css",
+                      "~/Content/Site.css"));
+            bundles.Add(new StyleBundle("~/fileinput/css").Include(
+                      "~/Content/bootstrap-fileinput/css/fileinput-rtl.css",
+                      "~/Content/bootstrap-fileinput/css/fileinput-rtl.min.css",
+                      "~/Content/bootstrap-fileinput/css/fileinput.css",
+                      "~/Content/bootstrap-fileinput/css/fileinput.min.css"));
         }
     }
 }

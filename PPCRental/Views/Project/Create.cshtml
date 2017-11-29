@@ -3,19 +3,36 @@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
+<link href="~/Content/bootstrap-fileinput/themes/explorer/theme.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-fileinput/themes/explorer-fa/theme.css" rel="stylesheet" />
+    //js
+@*<script src="~/Content/bootstrap-fileinput/themes/explorer-fa/theme.js"></script>
 
-
+<script src="~/Scripts/plugins/sortable.js"></script>
+<script src="~/Scripts/locales/fr.js"></script>
+<script src="~/Scripts/fileinput.js"></script>
+<script src="~/Scripts/locales/es.js"></script>
+<script src="~/Content/bootstrap-fileinput/themes/fa/theme.js"></script>
+<script src="~/Scripts/popper.min.js"></script>
+    
+<script src="~/Scripts/bootstrap.min.js"></script>*@
 }
+<!DOCTYPE HTML>
+<head>
+    <title>@ViewBag.Title - Post Property</title>
+    <meta charset="utf-8" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/fileinput/css")
 
-<h2>Create</h2>
 
+</head>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Project", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
 
-    <div class="form-horizontal" style="background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+    <div class="form-horizontal"  style="background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
                                         background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
                                         background-attachment: fixed;
                                         background-repeat: no-repeat;">
@@ -23,44 +40,39 @@
         <hr />
         @Html.ValidationSummary(true)
         <div>
-            <h4 class="col-lg-offset-0">PROPERTY</h4>
+            <h4 class="col-lg-offset-0">POST</h4>
         </div>
 
         <form>
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.ID, new { @class = " control-label col-md-4 " })*@
-                <label class="col-md-4 control-label">Id</label>
-                <div class="col-md-4 input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-heart-empty"></i></span>
-                    <input name="Id" class="form-control" type="text">
-                    @*@Html.EditorFor(model => model.ID)*@
-                    @Html.ValidationMessageFor(model => model.ID)
-                </div>
-            </div>
+            
 
             <div class="form-group">
                 @*@Html.LabelFor(model => model.PropertyName, new { @class = "contrl-label col-md-4" })*@
                 <label class=" col-md-4 control-label">PropertyName</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    <input name="property_name" class="form-control" type="text">
+                    <input name="PropertyName" class="form-control" type="text">
                     @*@Html.EditorFor(model => model.PropertyName)*@
                     @Html.ValidationMessageFor(model => model.PropertyName)
                 </div>
             </div>
 
-            <div class="form-group" @*style="float:right;margin-right:150px"*@>
-                @Html.LabelFor(model => model.Avatar, new { @class = "control-label col-md-4" })
-                <div class="col-md-4">
-                    @Html.EditorFor(model => model.Avatar)
-                    @Html.ValidationMessageFor(model => model.Avatar)
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.PropertyName, new { @class = "contrl-label col-md-4" })*@
+                <label class=" col-md-4 control-label">Avatar</label>
+                <div class="col-md-4 input-group">
+                    
+                    <input  class ="form-control" type="file" name="AvatarUpload" accept="image/*" />
+
+                    @*@Html.EditorFor(model => model.PropertyName)*@
+                    @Html.ValidationMessageFor(model => model.PropertyName)
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Images, new { @class = "control-label col-md-4" })
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.Images)
+                    <input class="form-control" type="file" name="Up" accept="image/*" multiple />
                     @Html.ValidationMessageFor(model => model.Images)
                 </div>
             </div>
@@ -69,7 +81,7 @@
                 @Html.LabelFor(model => model.PropertyType_ID, "PropertyType_ID", new { @class = "control-label col-md-4" })
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("PropertyType_ID", String.Empty)
+                    @Html.DropDownList("PropertyType_ID", null, String.Empty, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.PropertyType_ID)
                 </div>
             </div>
@@ -79,7 +91,7 @@
                 <label class=" col-md-4 control-label">Content</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-pencil"></i></span>
-                    <textarea class="form-control" name="content" placeholder="Project Description"></textarea>
+                    <textarea class="form-control" name="Content" placeholder="Project Description"></textarea>
                     @Html.ValidationMessageFor(model => model.Content)
                 </div>
             </div>
@@ -87,7 +99,7 @@
                 @Html.LabelFor(model => model.District_ID, "District_ID", new { @class = "control-label col-md-4" })
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("District_ID", String.Empty)
+                    @Html.DropDownList("District_ID", null, String.Empty, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Street_ID)
                 </div>
             </div>
@@ -97,15 +109,15 @@
                 @Html.LabelFor(model => model.Ward_ID, "Ward_ID", new { @class = "control-label col-md-4" })
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("Ward_ID", String.Empty)
+                    @Html.DropDownList("Ward_ID", null, String.Empty, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Ward_ID)
-                </div>
+                </div>  
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.Street_ID, "Street_ID", new { @class = "control-label col-md-4" })
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("Street_ID", String.Empty)
+                    @Html.DropDownList("Street_ID",null, String.Empty, new {@class ="form-control" })
                     @Html.ValidationMessageFor(model => model.Street_ID)
                 </div>
             </div>
@@ -114,7 +126,7 @@
 
             <div class="form-group">
                 @*@Html.LabelFor(model => model.Price, new { @class = "control-label col-md-4" })*@
-                <label class=" col-md-4 control-label">PropertyName</label>
+                <label class=" col-md-4 control-label">Price</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-usd"></i></span>
                     <input name="Price" class="form-control" type="text">
@@ -122,15 +134,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.UnitPrice, new { @class = "control-label col-md-4" })*@
-                <label class=" col-md-4 control-label">Unit Price</label>
-                <div class="col-md-4 input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-usd"></i></span>
-                    <input name="UnitPrice" class="form-control" type="text">
-                    @Html.ValidationMessageFor(model => model.UnitPrice)
-                </div>
-            </div>
+            
 
             <div class="form-group">
                 @*@Html.LabelFor(model => model.Area, new { @class = "control-label col-md-4" })*@
@@ -147,7 +151,7 @@
                 <label class=" col-md-4 control-label">BedRoom</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    <input name="Bed" class="form-control" type="text">
+                    <input name="BedRoom" class="form-control" type="text">
                     @Html.ValidationMessageFor(model => model.BedRoom)
                 </div>
             </div>
@@ -157,7 +161,7 @@
                 <label class=" col-md-4 control-label">BathRoom</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    <input name="property_name" class="form-control" type="text">
+                    <input name="BathRoom" class="form-control" type="text">
                     @Html.ValidationMessageFor(model => model.BathRoom)
                 </div>
             </div>
@@ -167,77 +171,30 @@
                 <label class=" col-md-4 control-label">Packing Place</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-heart-empty"></i></span>
-                    <input name="packing_place" class="form-control" type="text">
+                    <input name="PackingPlace" class="form-control" type="text">
                     @Html.ValidationMessageFor(model => model.PackingPlace)
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserID, "UserID", new { @class = "control-label col-md-4" })
-                <div class="col-md-4 input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("UserID", String.Empty)
-                    @Html.ValidationMessageFor(model => model.UserID)
-                </div>
-            </div>
+            
 
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.Created_at, new { @class = "control-label col-md-4" })*@
-                <label class=" col-md-4 control-label">Created at</label>
-                <div class="col-md-4 input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-calendar"></i></span>
-                    <input name="create_at" class="form-control" type="text">
-                    @Html.ValidationMessageFor(model => model.Created_at)
-                </div>
-            </div>
+            
 
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.Create_post, new { @class = "control-label col-md-4" })*@
-                <label class=" col-md-4 control-label">Create Post</label>
-                <div class="col-md-4 input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-calendar"></i></span>
-                    <input name="create_post" class="form-control" type="text">
-                    @Html.ValidationMessageFor(model => model.Create_post)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Status_ID, "Status_ID", new { @class = "control-label col-md-4" })
-                <div class="col-md-4 input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("Status_ID", String.Empty)
-                    @Html.ValidationMessageFor(model => model.Status_ID)
-                </div>
-            </div>
+            
 
             <div class="form-group">
                 @*@Html.LabelFor(model => model.Note, new { @class = "control-label col-md-4" })*@
                 <label class=" col-md-4 control-label">Note</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-pencil"></i></span>
-                    <textarea class="form-control" name="comment" placeholder="Description Here"></textarea>
+                    <textarea class="form-control" name="Note" placeholder="Description Here"></textarea>
                     @Html.ValidationMessageFor(model => model.Note)
                 </div>
             </div>
 
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.Updated_at, new { @class = "control-label col-md-4" })*@
-                <label class=" col-md-4 control-label">Update at</label>
-                <div class="col-md-4 input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-calendar"></i></span>
-                    <input name="update_at" class="form-control" type="text">
-                    @Html.ValidationMessageFor(model => model.Updated_at)
-                </div>
-            </div>
+           
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Sale_ID, "Sale_ID", new { @class = "control-label col-md-4" })
-                <div class="col-md-4 input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("Sale_ID", String.Empty)
-                    @Html.ValidationMessageFor(model => model.Sale_ID)
-                </div>
-            </div>
+            
 
             <div class="form-group">
                 <div class="col-md-offset-4 col-md-4">
@@ -252,6 +209,111 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@*<script>
+    $('#file-fr').fileinput({
+        theme: 'fa',
+        language: 'fr',
+        uploadUrl: '#',
+        allowedFileExtensions: ['jpg', 'png', 'gif']
+    });
+    $('#file-es').fileinput({
+        theme: 'fa',
+        language: 'es',
+        uploadUrl: '#',
+        allowedFileExtensions: ['jpg', 'png', 'gif']
+    });
+    $("#file-0").fileinput({
+        theme: 'fa',
+        'allowedFileExtensions': ['jpg', 'png', 'gif']
+    });
+    $("#file-1").fileinput({
+        theme: 'fa',
+        uploadUrl: '#', // you must set a valid URL here else you will get an error
+        allowedFileExtensions: ['jpg', 'png', 'gif'],
+        overwriteInitial: false,
+        maxFileSize: 1000,
+        maxFilesNum: 10,
+        //allowedFileTypes: ['image', 'video', 'flash'],
+        slugCallback: function (filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+    /*
+     $(".file").on('fileselect', function(event, n, l) {
+     alert('File Selected. Name: ' + l + ', Num: ' + n);
+     });
+     */
+    $("#file-3").fileinput({
+        theme: 'fa',
+        showUpload: false,
+        showCaption: false,
+        browseClass: "btn btn-primary btn-lg",
+        fileType: "any",
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+        overwriteInitial: false,
+        initialPreviewAsData: true,
+        initialPreview: [
+            "http://lorempixel.com/1920/1080/transport/1",
+            "http://lorempixel.com/1920/1080/transport/2",
+            "http://lorempixel.com/1920/1080/transport/3"
+        ],
+        initialPreviewConfig: [
+            { caption: "transport-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1 },
+            { caption: "transport-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2 },
+            { caption: "transport-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3 }
+        ]
+    });
+    $("#file-4").fileinput({
+        theme: 'fa',
+        uploadExtraData: { kvId: '10' }
+    });
+    $(".btn-warning").on('click', function () {
+        var $el = $("#file-4");
+        if ($el.attr('disabled')) {
+            $el.fileinput('enable');
+        } else {
+            $el.fileinput('disable');
+        }
+    });
+    $(".btn-info").on('click', function () {
+        $("#file-4").fileinput('refresh', { previewClass: 'bg-info' });
+    });
+    /*
+     $('#file-4').on('fileselectnone', function() {
+     alert('Huh! You selected no files.');
+     });
+     $('#file-4').on('filebrowse', function() {
+     alert('File browse clicked for #file-4');
+     });
+     */
+    $(document).ready(function () {
+        $("#test-upload").fileinput({
+            'theme': 'fa',
+            'showPreview': false,
+            'allowedFileExtensions': ['jpg', 'png', 'gif'],
+            'elErrorContainer': '#errorBlock'
+        });
+        $("#kv-explorer").fileinput({
+            'theme': 'explorer-fa',
+            'uploadUrl': '#',
+            overwriteInitial: false,
+            initialPreviewAsData: true,
+            initialPreview: [
+                "http://lorempixel.com/1920/1080/nature/1",
+                "http://lorempixel.com/1920/1080/nature/2",
+                "http://lorempixel.com/1920/1080/nature/3"
+            ],
+            initialPreviewConfig: [
+                { caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1 },
+                { caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2 },
+                { caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3 }
+            ]
+        });
+        /*
+         $("#test-upload").on('fileloaded', function(event, file, previewId, index) {
+         alert('i = ' + index + ', id = ' + previewId + ', file = ' + file.name);
+         });
+         */
+    });
+</script>*@
+

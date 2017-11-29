@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="869d4f3cc12a45b28fce938fcba5b348" Name="Diagram1">
+      <Diagram DiagramId="869d4f3cc12a45b28fce938fcba5b348" Name="Diagram1" ZoomLevel="10">
         <EntityTypeShape EntityType="PPCRentalModel.DISTRICT" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PPCRentalModel.FEATURE" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PPCRentalModel.PROJECT_STATUS" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="PPCRentalModel.STREET" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PPCRentalModel.USER" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PPCRentalModel.WARD" Width="1.5" PointX="3" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PPCRentalModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="PPCRentalModel.FK_PROPERTY_DISTRICT" ManuallyRouted="false" />
         <AssociationConnector Association="PPCRentalModel.FK_STREET_DISTRICT" ManuallyRouted="false" />
         <AssociationConnector Association="PPCRentalModel.FK_WARD_DISTRICT" ManuallyRouted="false" />

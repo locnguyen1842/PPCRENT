@@ -13,9 +13,8 @@ namespace PPCRental.Models
     using System.Data.Entity;
     using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Infrastructure;
-    //using System.Data.Objects;
-    //using System.Data.Objects.DataClasses;
-    //using System.Linq;
+    using System.Data.Entity.Core.Objects.DataClasses;
+    using System.Linq;
     
     public partial class PPCRentalEntities2 : DbContext
     {
@@ -38,7 +37,6 @@ namespace PPCRental.Models
         public DbSet<STREET> STREETs { get; set; }
         public DbSet<USER> USERs { get; set; }
         public DbSet<WARD> WARDs { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

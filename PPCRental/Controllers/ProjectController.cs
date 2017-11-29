@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PPCRental.Models;
+using System.IO;
+
 
 namespace PPCRental.Controllers
 {
@@ -60,7 +62,15 @@ namespace PPCRental.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create( PROPERTY property)
         {
+
+            property.Avatar = AvatarU(property);
+            property.Images = ImagesU(property);
             property.Created_at = DateTime.Now;
+            property.Create_post = DateTime.Now;
+            property.UnitPrice = "VND"; 
+            property.Sale_ID = 1;
+            property.Status_ID = 1;
+            property.UserID = 1;
             
             if (ModelState.IsValid)
             {
@@ -80,6 +90,54 @@ namespace PPCRental.Controllers
             return View(property);
         }
 
+        private string ImagesU(PROPERTY p)
+        {
+           
+            string filename;
+            string extension;
+            string b;
+            string s = "";
+            foreach (var file in p.Up)
+            {
+                if (file.ContentLength > 0)
+                {
+                    filename = Path.GetFileNameWithoutExtension(file.FileName);
+                    extension = Path.GetExtension(file.FileName);
+                    filename = filename + DateTime.Now.ToString("yymmssff") + extension;
+                    p.Images = filename;
+                    b = p.Images;
+                    s = string.Concat(s, b, ",");
+                    filename = Path.Combine(Server.MapPath("~/Images"), filename);
+                    file.SaveAs(filename);
+                    
+                }
+                
+            }
+            return s;
+            
+        }
+        private string AvatarU(PROPERTY p)
+        {
+            string s = "";
+            string filename;
+            string extension;
+
+
+            if (p.AvatarUpload != null)
+            {
+                filename = Path.GetFileNameWithoutExtension(p.AvatarUpload.FileName);
+                extension = Path.GetExtension(p.AvatarUpload.FileName);
+                filename = filename + DateTime.Now.ToString("yymmssff") + extension;
+                p.Avatar = filename;
+                s = p.Avatar;
+                filename = Path.Combine(Server.MapPath("~/Images"), filename);
+                p.AvatarUpload.SaveAs(filename);
+                return s;
+
+            }
+            return s;
+           
+        }
         // GET: /Project/Edit/5
         public ActionResult Edit(int? id)
         {

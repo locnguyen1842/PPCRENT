@@ -74,6 +74,9 @@ namespace PPCRental.Areas.Admin.Controllers
             return RedirectToAction("ViewListofAgencyProject");
         }
 
+
+
+
         private void AvatarU(PROPERTY p, out PROPERTY en, out string s)
         {
             en = model.PROPERTies.Find(p.ID);
@@ -117,15 +120,22 @@ namespace PPCRental.Areas.Admin.Controllers
 
                 foreach (var file in p.Up)
                 {
-
-                    filename = Path.GetFileNameWithoutExtension(file.FileName);
-                    extension = Path.GetExtension(file.FileName);
-                    filename = filename + DateTime.Now.ToString("yymmssff") + extension;
-                    p.Images = filename;
-                    b = p.Images;
-                    s = string.Concat(s, b, ",");
-                    filename = Path.Combine(Server.MapPath("~/Images"), filename);
-                    file.SaveAs(filename);
+                    if (file.ContentLength > 0)
+                    {
+                        filename = Path.GetFileNameWithoutExtension(file.FileName);
+                        extension = Path.GetExtension(file.FileName);
+                        filename = filename + DateTime.Now.ToString("yymmssff") + extension;
+                        p.Images = filename;
+                        b = p.Images;
+                        s = string.Concat(s, b, ",");
+                        filename = Path.Combine(Server.MapPath("~/Images"), filename);
+                        file.SaveAs(filename);
+                    }
+                    else
+                    {
+                        s = en.Images;
+                    }
+                    
                 }
 
 
