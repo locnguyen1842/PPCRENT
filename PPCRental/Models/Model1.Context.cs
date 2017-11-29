@@ -37,6 +37,7 @@ namespace PPCRental.Models
         public DbSet<STREET> STREETs { get; set; }
         public DbSet<USER> USERs { get; set; }
         public DbSet<WARD> WARDs { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

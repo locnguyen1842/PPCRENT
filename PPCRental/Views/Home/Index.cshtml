@@ -7,10 +7,7 @@
     var db = new PPCRentalEntities2();
     ViewBag.Title = "Home Page";
     //Layout = "~/Views/Shared/_Layout.cshtml";
-    List<PPCRental.Models.PROPERTY> listProperty = Model.ToList()[0] as List<PPCRental.Models.PROPERTY>;
-    List<PPCRental.Models.DISTRICT> listDistrict = Model.ToList()[1] as List<PPCRental.Models.DISTRICT>;
-    List<PPCRental.Models.PROPERTY_TYPE> listProperty_type = Model.ToList()[2] as List<PPCRental.Models.PROPERTY_TYPE>;
-    var District = new SelectList(db.DISTRICTs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "DistrictName");
+    List<PPCRental.Models.PROPERTY> lstProperty = Model.ToList()[0] as List<PPCRental.Models.PROPERTY>;
     var Type = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
     var Ward = new SelectList(db.WARDs, "ID", "WardName");
     var Street = new SelectList(db.STREETs.Take(0), "ID", "StreetName");
@@ -70,8 +67,8 @@
                                         <label for="inputDistrict3" class="col-sm-2 control-label" style="color:black">
                                             District
                                         </label>
-                                        <div style="width:190px">
-                                            @Html.DropDownList("District", District, "All District", new { @class = "form-control" })
+                                        <div style="width:190px; " >
+                                            @Html.DropDownList("District_ID", null, "All District", new { @class = "form-control" })
                                         </div>
                                     </div>
                                 </div>
@@ -80,8 +77,8 @@
                                         <label for="inputPropertyType3" class="col-sm-2 control-label">
                                             Type
                                         </label>
-                                        <div style="width:190px">
-                                            @Html.DropDownList("Type", Type, "All Type", new { @class = "form-control" })
+                                        <div style="width: 190px;">
+                                            @Html.DropDownList("PropertyType_ID", Type, "All Type", new { @class = "form-control" })
                                         </div>
                                     </div>
                                 </div>
@@ -112,7 +109,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group mt-4">
-                                    <div class="col" style="margin-top:7px">
+                                    <div class="col" style="margin-bottom:10px">
                                         <input type="submit" value="Filter" class="btn btn-danger btn-block glyphicon glyphicon-filter" role="button"></a>
                                     </div>
                                 </div>
@@ -143,7 +140,7 @@
             <div id="properties_list">
 
                 <div class="row">
-                    @foreach (var item in listProperty)
+                    @foreach (var item in lstProperty)
                     {
                         <div class="col-sm-6 col-md-4">
                             <div class="thumbnail">

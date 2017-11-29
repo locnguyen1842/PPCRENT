@@ -7,9 +7,6 @@
     ViewBag.Title = "Listings";
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<PPCRental.Models.PROPERTY> lstProperty = Model.ToList()[0] as List<PPCRental.Models.PROPERTY>;
-    List<PPCRental.Models.DISTRICT> lstDistrict = Model.ToList()[1] as List<PPCRental.Models.DISTRICT>;
-    List<PPCRental.Models.PROPERTY_TYPE> lstPType = Model.ToList()[2] as List<PPCRental.Models.PROPERTY_TYPE>;
-    var District = new SelectList(db.DISTRICTs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "DistrictName");
     var Type = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
     var Ward = new SelectList(db.WARDs, "ID", "WardName");
     var Street = new SelectList(db.STREETs.Take(0), "ID", "StreetName");
@@ -36,9 +33,9 @@
     <form>
         <div class="container">
             <div id="post">
-
+                
                 <div class="row">
-                    @foreach (var item in lstProperty)
+                    @foreach (var item in  lstProperty)
                     {
                         <div class="col-sm-6 col-md-4">
                             <div class="thumbnail">
@@ -74,22 +71,18 @@
                                 <div class="form-group">
                                     <label for="location1" class="control-label">District</label>
                                     <br />
-                                    @Html.DropDownList("District", District, "All District", new { @class = "form-control" })
+                                    @Html.DropDownList("District_ID", null, "All District", new { @class = "form-control" })
                                 </div>
                                 @*<div class="form-group">
                                         <label for="type1" class="control-label">Ward</label>
                                         <br />
                                         @Html.DropDownList("Ward", Ward, "All Ward", new { @class = "form-control" })
                                     </div>*@
-                                <div class="form-group">
-                                    <label for="type1" class="control-label">Street</label>
-                                    <br />
-                                    @Html.DropDownList("Street", Street, "All Street", new { @class = "form-control" })
-                                </div>
+                                
                                 <div class="form-group">
                                     <label for="type1" class="control-label">Type</label>
                                     <br />
-                                    @Html.DropDownList("Type", Type, "All Type", new { @class = "form-control" })
+                                    @Html.DropDownList("PropertyType_ID", Type, "All Type", new { @class = "form-control" })
                                 </div>
                                 <div class="form-group">
                                     <label for="pricefrom" class="control-label">Min Price</label>

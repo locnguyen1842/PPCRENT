@@ -12,6 +12,7 @@ namespace PPCRental.Models
     using System;
     using System.Collections.Generic;
     using System.Web;
+    
     public partial class PROPERTY
     {
         public PROPERTY()
@@ -50,7 +51,6 @@ namespace PPCRental.Models
         public virtual USER USER { get; set; }
         public virtual USER USER1 { get; set; }
         public virtual WARD WARD { get; set; }
-
         public HttpPostedFileBase AvatarUpload { get; set; }
         public IEnumerable<HttpPostedFileBase> Up { get; set; }
     }

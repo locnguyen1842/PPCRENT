@@ -14,8 +14,11 @@ namespace PPCRental.Controllers
         {
             List<object> myModel = new List<object>();
             myModel.Add(db.PROPERTies.ToList());
-            myModel.Add(db.DISTRICTs.ToList());
-            myModel.Add(db.PROPERTY_TYPE.ToList());
+            ViewBag.District_ID = new SelectList(db.DISTRICTs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "DistrictName");
+
+            ViewBag.PropertyType_ID = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
+
+            ViewBag.Feature_ID = new SelectList(db.FEATUREs, "ID", "FeatureName");
             return View(myModel);
         }
 
@@ -32,5 +35,6 @@ namespace PPCRental.Controllers
 
             return View();
         }
+        
     }
 }

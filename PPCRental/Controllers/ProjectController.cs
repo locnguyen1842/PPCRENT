@@ -21,10 +21,14 @@ namespace PPCRental.Controllers
         {
             List<object> myModel = new List<object>();
             myModel.Add(db.PROPERTies.ToList());
-            myModel.Add(db.DISTRICTs.ToList());
-            myModel.Add(db.PROPERTY_TYPE.ToList());
-            //var properties = db.PROPERTies.Include(p => p.DISTRICT).Include(p => p.PROJECT_STATUS).Include(p => p.PROPERTY_TYPE).Include(p => p.STREET).Include(p => p.USER).Include(p => p.USER1).Include(p => p.WARD);
+            ViewBag.District_ID = new SelectList(db.DISTRICTs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "DistrictName");
+            
+            ViewBag.PropertyType_ID = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
+           
+            ViewBag.Feature_ID = new SelectList(db.FEATUREs, "ID", "FeatureName");
             return View(myModel);
+            //var properties = db.PROPERTies.Include(p => p.DISTRICT).Include(p => p.PROJECT_STATUS).Include(p => p.PROPERTY_TYPE).Include(p => p.STREET).Include(p => p.USER).Include(p => p.USER1).Include(p => p.WARD);
+            
         }
         [HttpPost]
         public ActionResult Index(int? District,int? Street,int? Type)
@@ -56,10 +60,11 @@ namespace PPCRental.Controllers
             ViewBag.District_ID = new SelectList(db.DISTRICTs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "DistrictName");
             ViewBag.Status_ID = new SelectList(db.PROJECT_STATUS, "ID", "Status_Name");
             ViewBag.PropertyType_ID = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
-            ViewBag.Street_ID = new SelectList(db.STREETs.Where(y => y.District_ID >= 31 && y.District_ID <= 54), "ID", "StreetName");
+            ViewBag.Street_ID = new SelectList(db.STREETs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "StreetName");
             ViewBag.UserID = new SelectList(db.USERs, "ID", "Email");
             ViewBag.Sale_ID = new SelectList(db.USERs, "ID", "Email");
-            ViewBag.Ward_ID = new SelectList(db.WARDs.Where(y => y.District_ID >= 31 && y.District_ID <= 54), "ID", "WardName");
+            ViewBag.Ward_ID = new SelectList(db.WARDs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "WardName");
+            ViewBag.Feature_ID = new SelectList(db.FEATUREs, "ID", "FeatureName");
             return View();
         }
 
@@ -70,14 +75,14 @@ namespace PPCRental.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create( PROPERTY property)
         {
-
+            
             property.Avatar = AvatarU(property);
             property.Images = ImagesU(property);
             property.Created_at = DateTime.Now;
             property.Create_post = DateTime.Now;
             property.UnitPrice = "VND"; 
             property.Sale_ID = 1;
-            property.Status_ID = 1;
+            property.Status_ID = 1; 
             property.UserID = 1;
             
             if (ModelState.IsValid)
@@ -158,13 +163,13 @@ namespace PPCRental.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.District_ID = new SelectList(db.DISTRICTs, "ID", "DistrictName", property.District_ID);
-            ViewBag.Status_ID = new SelectList(db.PROJECT_STATUS, "ID", "Status_Name", property.Status_ID);
-            ViewBag.PropertyType_ID = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType", property.PropertyType_ID);
-            ViewBag.Street_ID = new SelectList(db.STREETs, "ID", "StreetName", property.Street_ID);
-            ViewBag.UserID = new SelectList(db.USERs, "ID", "Email", property.UserID);
-            ViewBag.Sale_ID = new SelectList(db.USERs, "ID", "Email", property.Sale_ID);
-            ViewBag.Ward_ID = new SelectList(db.WARDs, "ID", "WardName", property.Ward_ID);
+            ViewBag.District = new SelectList(db.DISTRICTs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "DistrictName");
+            ViewBag.Status_ID = new SelectList(db.PROJECT_STATUS, "ID", "Status_Name");
+            ViewBag.PropertyType_ID = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
+            ViewBag.Street = new SelectList(db.STREETs.Take(0), "ID", "StreetName");
+            ViewBag.UserID = new SelectList(db.USERs, "ID", "Email");
+            ViewBag.Sale_ID = new SelectList(db.USERs, "ID", "Email");
+            ViewBag.Ward = new SelectList(db.WARDs.Take(0), "ID", "WardName");
             return View(property);
         }
 
@@ -242,6 +247,33 @@ namespace PPCRental.Controllers
                 text = s.StreetName
             }), JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetWard(int did)
+        {
+            var db = new PPCRentalEntities2();
+            var ward = db.WARDs.Where(s => s.District_ID == did);
+            return Json(ward.Select(s => new
+            {
+                id = s.ID,
+                text = s.WardName
+            }), JsonRequestBehavior.AllowGet);
             
+
+        }
+        public ActionResult Filter(int? district, int? type, int? min, int? max)
+        {
+            List<object> myModel = new List<object>();
+            myModel.Add(db.PROPERTies.ToList());
+
+            var pro = db.PROPERTies.ToList();
+            if (district != ViewBag.DisTrict_ID)
+            {
+                pro = pro.Where(p => p.District_ID == district).ToList();
+            }
+            if (type != ViewBag.PropertyType_ID)
+            {
+                pro = pro.Where(p => p.District_ID == type).ToList();
+            }
+            return View(pro);
+        }
     }
 }

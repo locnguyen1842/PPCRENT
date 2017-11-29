@@ -1,21 +1,18 @@
 ﻿@model PPCRental.Models.PROPERTY
-    @using PPCRental.Models;
 
 @{
-    var db = new PPCRentalEntities2();
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var District = new SelectList(db.DISTRICTs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "DistrictName");
-    var Type = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
-    var Ward = new SelectList(db.WARDs, "ID", "WardName");
-    var Street = new SelectList(db.STREETs.Take(0), "ID", "StreetName");
-    var User = new SelectList(db.USERs, "ID", "Email");
-    var Status = new SelectList(db.PROJECT_STATUS, "ID", "Status_Name");
-    var Sale = new SelectList(db.USERs,"ID", "Email");
-
-
+    //var DistrictId = new SelectList(db.DISTRICTs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "DistrictName");
+    //var Type = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
+    //var WardId = new SelectList(db.WARDs.Take(0), "ID", "WardName");
+    //var StreetId = new SelectList(db.STREETs.Take(0), "ID", "StreetName");
+    //var User = new SelectList(db.USERs, "ID", "Email");
+    //var Status = new SelectList(db.PROJECT_STATUS, "ID", "Status_Name");
+    //var Sale = new SelectList(db.USERs, "ID", "Email");
+   
 }
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <head>
     <title>@ViewBag.Title - Post Property</title>
     <meta charset="utf-8" />
@@ -30,7 +27,7 @@
     @Html.AntiForgeryToken()
 
 
-    <div class="form-horizontal"  style="background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+    <div class="form-horizontal" style="background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
                                         background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
                                         background-attachment: fixed;
                                         background-repeat: no-repeat;">
@@ -58,7 +55,7 @@
             <div class="form-group" @*style="float:right;margin-right:150px"*@>
                 @Html.LabelFor(model => model.Avatar, new { @class = "control-label col-md-4" })
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.Avatar)
+                    <input class="form-control" type="file" name="AvatarUpload" accept="image/*" />
                     @Html.ValidationMessageFor(model => model.Avatar)
                 </div>
             </div>
@@ -72,11 +69,11 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.PropertyType_ID, "PropertyType_ID", new { @class = "control-label col-md-4" })
+                @*@Html.LabelFor(model => model.PropertyType_ID, "PropertyType_ID", new { @class = "control-label col-md-4" })*@
+                <label class="col-md-4 control-label">Type</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("Type", Type, "All Type", new { @class = "form-control" })
-                    @*@Html.DropDownList("PropertyType_ID", String.Empty)*@
+                    @Html.DropDownList("PropertyType_ID", null, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.PropertyType_ID)
                 </div>
             </div>
@@ -95,28 +92,28 @@
                 <label class="col-md-4 control-label">District</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("District", District, "All District", new { @class = "form-control" })
-                    @*@Html.DropDownList("District_ID", String.Empty)*@
+                    @Html.DropDownList("District_ID", null, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Street_ID)
                 </div>
             </div>
 
 
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.Ward_ID, "Ward_ID", new { @class = "control-label col-md-4" })
-                <div class="col-md-4 input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("Ward_ID", null, String.Empty, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Ward_ID)
+            <div class="form-group">
+                    @Html.LabelFor(model => model.Ward_ID, "Ward_ID", new { @class = "control-label col-md-4" })
+                    <div class="col-md-4 input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                        @Html.DropDownList("Ward_ID", null, new {@class ="form-control" })
+                        @*@Html.DropDownList("Ward", null, new { @class = "form-control" })*@
+                        @Html.ValidationMessageFor(model => model.Ward_ID)
+                    </div>
                 </div>
-            </div>*@
             <div class="form-group">
                 @*@Html.LabelFor(model => model.Street_ID, "Street_ID", new { @class = "control-label col-md-4" })*@
                 <label class="col-md-4 control-label">Street</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("Street", Street, "All Street", new { @class = "form-control" })
-                    @*@Html.DropDownList("Street_ID", String.Empty)*@
+                   @Html.DropDownList("Street_ID", null, new { @class = "form-control" })
+                    @*@Html.DropDownList("Street",null, new { @class = "form-control" })*@
                     @Html.ValidationMessageFor(model => model.Street_ID)
                 </div>
             </div>
@@ -167,7 +164,7 @@
 
             <div class="form-group">
                 @*@Html.LabelFor(model => model.PackingPlace, new { @class = "control-label col-md-4" })*@
-                <label class=" col-md-4 control-label">Packing Place</label>
+                <label class=" col-md-4 control-label">Parking Place</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-heart-empty"></i></span>
                     <input name="PackingPlace" class="form-control" type="text">
@@ -175,27 +172,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserID, "UserID", new { @class = "control-label col-md-4" })
-                <div class="col-md-4 input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("UserID", String.Empty)
-                    @Html.ValidationMessageFor(model => model.UserID)
-                </div>
-            </div>
 
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Status_ID, "Status_ID", new { @class = "control-label col-md-4" })
-                <div class="col-md-4 input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("Status_ID", String.Empty)
-                    @Html.ValidationMessageFor(model => model.Status_ID)
-                </div>
-            </div>
-
-            
 
             <div class="form-group">
                 @*@Html.LabelFor(model => model.Note, new { @class = "control-label col-md-4" })*@
@@ -206,18 +183,8 @@
                     @Html.ValidationMessageFor(model => model.Note)
                 </div>
             </div>
+          
 
-           
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Sale_ID, "Sale_ID", new { @class = "control-label col-md-4" })
-                <div class="col-md-4 input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("Sale_ID", String.Empty)
-                    @Html.ValidationMessageFor(model => model.Sale_ID)
-                </div>
-            </div>
 
             <div class="form-group">
                 <div class="col-md-offset-4 col-md-4">
@@ -234,61 +201,43 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-<script>
-    $('#District').select2();
-    $('#Type').select2();
-    $('#Ward').select2();
-    $('#Street').select2();
-    $('#District').on('change', function () {
-        $('#Ward').empty();
-        $.getJSON('GetStreet?did=' + $('#District').val(), function (json) {
-            $('#Street').select2({ data: json });
-        });
-    });
-    </script>
-}
-    });
-    $(".btn-info").on('click', function () {
-        $("#file-4").fileinput('refresh', { previewClass: 'bg-info' });
-    });
-    /*
-     $('#file-4').on('fileselectnone', function() {
-     alert('Huh! You selected no files.');
-     });
-     $('#file-4').on('filebrowse', function() {
-     alert('File browse clicked for #file-4');
-     });
-     */
-    $(document).ready(function () {
-        $("#test-upload").fileinput({
-            'theme': 'fa',
-            'showPreview': false,
-            'allowedFileExtensions': ['jpg', 'png', 'gif'],
-            'elErrorContainer': '#errorBlock'
-        });
-        $("#kv-explorer").fileinput({
-            'theme': 'explorer-fa',
-            'uploadUrl': '#',
-            overwriteInitial: false,
-            initialPreviewAsData: true,
-            initialPreview: [
-                "http://lorempixel.com/1920/1080/nature/1",
-                "http://lorempixel.com/1920/1080/nature/2",
-                "http://lorempixel.com/1920/1080/nature/3"
-            ],
-            initialPreviewConfig: [
-                { caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1 },
-                { caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2 },
-                { caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3 }
-            ]
-        });
-        /*
-         $("#test-upload").on('fileloaded', function(event, file, previewId, index) {
-         alert('i = ' + index + ', id = ' + previewId + ', file = ' + file.name);
-         });
-         */
-    });
-</script>*@
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script>
+        $('#District_ID').select2();
+        $('#Type').select2();
+        $('#Ward_ID').select2();
+        $('#Street_ID').select2();
+        $('#District_ID').on('change', function () {
+            $('#Ward_ID').empty();
+            $('#Street_ID').empty();
+
+            $.getJSON('GetWard?did=' + $('#District_ID').val(), function (json) {
+                $('#Ward_ID').select2({ data: json });
+            });
+            $.getJSON('GetStreet?did=' + $('#District_ID').val(), function (json) {
+                $('#Street_ID').select2({ data: json });
+            }); 
+        });
+        //var data = $.map(District, function (obj) {
+        //    obj.id = obj.id || obj.pk; // replace pk with your identifier
+
+        //    return obj;
+        //});
+        //var data = $.map(Ward, function (obj) {
+        //    obj.id = obj.id || obj.pk; // replace pk with your identifier
+
+        //    return obj;
+        //});
+        //var data = $.map(Street, function (obj) {
+        //    obj.id = obj.id || obj.pk; // replace pk with your identifier
+
+        //    return obj;
+        //});
+        
+    </script>
+        }
+        
