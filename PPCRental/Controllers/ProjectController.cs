@@ -26,6 +26,14 @@ namespace PPCRental.Controllers
             //var properties = db.PROPERTies.Include(p => p.DISTRICT).Include(p => p.PROJECT_STATUS).Include(p => p.PROPERTY_TYPE).Include(p => p.STREET).Include(p => p.USER).Include(p => p.USER1).Include(p => p.WARD);
             return View(myModel);
         }
+        [HttpPost]
+        public ActionResult Index(int? District,int? Street,int? Type)
+        {
+            var db = new PPCRentalEntities2();
+            var model = db.PROPERTies.Where(s => s.District_ID == District).ToList();
+            //var properties = db.PROPERTies.Include(p => p.DISTRICT).Include(p => p.PROJECT_STATUS).Include(p => p.PROPERTY_TYPE).Include(p => p.STREET).Include(p => p.USER).Include(p => p.USER1).Include(p => p.WARD);
+            return RedirectToAction("Filter");
+        }
 
         // GET: /Project/Details/5
         public ActionResult Details(int? id)
@@ -217,21 +225,22 @@ namespace PPCRental.Controllers
             }
             base.Dispose(disposing);
         }
-
-        public ActionResult Filter(int? area,int? type,int? min, int? max)
+        [HttpPost]
+        public ActionResult Filter(List<PROPERTY> model)
         {
-            var project = db.PROPERTies.ToList();
-            if (area != 99){
-                project = project.Where(p => p.District_ID == area).ToList();
-                
-            }
-            if (type != 99)
-            {
-                project = project.Where(p => p.PropertyType_ID == type).ToList();
-            }
-            
-            return View(project);
+            var db = new PPCRentalEntities2();
+            return View();
 
+        }
+        public JsonResult GetStreet( int did)
+        {
+            var db = new PPCRentalEntities2();
+            var ward = db.STREETs.Where(s => s.District_ID == did);
+            return Json(ward.Select(s => new
+            {
+                id = s.ID,
+                text = s.StreetName
+            }), JsonRequestBehavior.AllowGet);
         }
             
     }

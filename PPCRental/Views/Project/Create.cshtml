@@ -1,21 +1,19 @@
 ﻿@model PPCRental.Models.PROPERTY
+    @using PPCRental.Models;
 
 @{
+    var db = new PPCRentalEntities2();
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
-<link href="~/Content/bootstrap-fileinput/themes/explorer/theme.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-fileinput/themes/explorer-fa/theme.css" rel="stylesheet" />
-    //js
-@*<script src="~/Content/bootstrap-fileinput/themes/explorer-fa/theme.js"></script>
+    var District = new SelectList(db.DISTRICTs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "DistrictName");
+    var Type = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
+    var Ward = new SelectList(db.WARDs, "ID", "WardName");
+    var Street = new SelectList(db.STREETs.Take(0), "ID", "StreetName");
+    var User = new SelectList(db.USERs, "ID", "Email");
+    var Status = new SelectList(db.PROJECT_STATUS, "ID", "Status_Name");
+    var Sale = new SelectList(db.USERs,"ID", "Email");
 
-<script src="~/Scripts/plugins/sortable.js"></script>
-<script src="~/Scripts/locales/fr.js"></script>
-<script src="~/Scripts/fileinput.js"></script>
-<script src="~/Scripts/locales/es.js"></script>
-<script src="~/Content/bootstrap-fileinput/themes/fa/theme.js"></script>
-<script src="~/Scripts/popper.min.js"></script>
-    
-<script src="~/Scripts/bootstrap.min.js"></script>*@
+
 }
 <!DOCTYPE HTML>
 <head>
@@ -44,7 +42,7 @@
         </div>
 
         <form>
-            
+
 
             <div class="form-group">
                 @*@Html.LabelFor(model => model.PropertyName, new { @class = "contrl-label col-md-4" })*@
@@ -57,15 +55,11 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.PropertyName, new { @class = "contrl-label col-md-4" })*@
-                <label class=" col-md-4 control-label">Avatar</label>
-                <div class="col-md-4 input-group">
-                    
-                    <input  class ="form-control" type="file" name="AvatarUpload" accept="image/*" />
-
-                    @*@Html.EditorFor(model => model.PropertyName)*@
-                    @Html.ValidationMessageFor(model => model.PropertyName)
+            <div class="form-group" @*style="float:right;margin-right:150px"*@>
+                @Html.LabelFor(model => model.Avatar, new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Avatar)
+                    @Html.ValidationMessageFor(model => model.Avatar)
                 </div>
             </div>
 
@@ -81,7 +75,8 @@
                 @Html.LabelFor(model => model.PropertyType_ID, "PropertyType_ID", new { @class = "control-label col-md-4" })
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("PropertyType_ID", null, String.Empty, new { @class = "form-control" })
+                    @Html.DropDownList("Type", Type, "All Type", new { @class = "form-control" })
+                    @*@Html.DropDownList("PropertyType_ID", String.Empty)*@
                     @Html.ValidationMessageFor(model => model.PropertyType_ID)
                 </div>
             </div>
@@ -96,28 +91,32 @@
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.District_ID, "District_ID", new { @class = "control-label col-md-4" })
+                @*@Html.LabelFor(model => model.District_ID, "District_ID", new { @class = "control-label col-md-4" })*@
+                <label class="col-md-4 control-label">District</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("District_ID", null, String.Empty, new { @class = "form-control" })
+                    @Html.DropDownList("District", District, "All District", new { @class = "form-control" })
+                    @*@Html.DropDownList("District_ID", String.Empty)*@
                     @Html.ValidationMessageFor(model => model.Street_ID)
                 </div>
             </div>
 
 
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(model => model.Ward_ID, "Ward_ID", new { @class = "control-label col-md-4" })
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
                     @Html.DropDownList("Ward_ID", null, String.Empty, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Ward_ID)
-                </div>  
-            </div>
+                </div>
+            </div>*@
             <div class="form-group">
-                @Html.LabelFor(model => model.Street_ID, "Street_ID", new { @class = "control-label col-md-4" })
+                @*@Html.LabelFor(model => model.Street_ID, "Street_ID", new { @class = "control-label col-md-4" })*@
+                <label class="col-md-4 control-label">Street</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("Street_ID",null, String.Empty, new {@class ="form-control" })
+                    @Html.DropDownList("Street", Street, "All Street", new { @class = "form-control" })
+                    @*@Html.DropDownList("Street_ID", String.Empty)*@
                     @Html.ValidationMessageFor(model => model.Street_ID)
                 </div>
             </div>
@@ -134,7 +133,7 @@
                 </div>
             </div>
 
-            
+
 
             <div class="form-group">
                 @*@Html.LabelFor(model => model.Area, new { @class = "control-label col-md-4" })*@
@@ -176,9 +175,25 @@
                 </div>
             </div>
 
-            
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserID, "UserID", new { @class = "control-label col-md-4" })
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                    @Html.DropDownList("UserID", String.Empty)
+                    @Html.ValidationMessageFor(model => model.UserID)
+                </div>
+            </div>
 
-            
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Status_ID, "Status_ID", new { @class = "control-label col-md-4" })
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                    @Html.DropDownList("Status_ID", String.Empty)
+                    @Html.ValidationMessageFor(model => model.Status_ID)
+                </div>
+            </div>
 
             
 
@@ -194,7 +209,15 @@
 
            
 
-            
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Sale_ID, "Sale_ID", new { @class = "control-label col-md-4" })
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
+                    @Html.DropDownList("Sale_ID", String.Empty)
+                    @Html.ValidationMessageFor(model => model.Sale_ID)
+                </div>
+            </div>
 
             <div class="form-group">
                 <div class="col-md-offset-4 col-md-4">
@@ -209,71 +232,23 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@*<script>
-    $('#file-fr').fileinput({
-        theme: 'fa',
-        language: 'fr',
-        uploadUrl: '#',
-        allowedFileExtensions: ['jpg', 'png', 'gif']
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script>
+    $('#District').select2();
+    $('#Type').select2();
+    $('#Ward').select2();
+    $('#Street').select2();
+    $('#District').on('change', function () {
+        $('#Ward').empty();
+        $.getJSON('GetStreet?did=' + $('#District').val(), function (json) {
+            $('#Street').select2({ data: json });
+        });
     });
-    $('#file-es').fileinput({
-        theme: 'fa',
-        language: 'es',
-        uploadUrl: '#',
-        allowedFileExtensions: ['jpg', 'png', 'gif']
-    });
-    $("#file-0").fileinput({
-        theme: 'fa',
-        'allowedFileExtensions': ['jpg', 'png', 'gif']
-    });
-    $("#file-1").fileinput({
-        theme: 'fa',
-        uploadUrl: '#', // you must set a valid URL here else you will get an error
-        allowedFileExtensions: ['jpg', 'png', 'gif'],
-        overwriteInitial: false,
-        maxFileSize: 1000,
-        maxFilesNum: 10,
-        //allowedFileTypes: ['image', 'video', 'flash'],
-        slugCallback: function (filename) {
-            return filename.replace('(', '_').replace(']', '_');
-        }
-    });
-    /*
-     $(".file").on('fileselect', function(event, n, l) {
-     alert('File Selected. Name: ' + l + ', Num: ' + n);
-     });
-     */
-    $("#file-3").fileinput({
-        theme: 'fa',
-        showUpload: false,
-        showCaption: false,
-        browseClass: "btn btn-primary btn-lg",
-        fileType: "any",
-        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-        overwriteInitial: false,
-        initialPreviewAsData: true,
-        initialPreview: [
-            "http://lorempixel.com/1920/1080/transport/1",
-            "http://lorempixel.com/1920/1080/transport/2",
-            "http://lorempixel.com/1920/1080/transport/3"
-        ],
-        initialPreviewConfig: [
-            { caption: "transport-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1 },
-            { caption: "transport-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2 },
-            { caption: "transport-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3 }
-        ]
-    });
-    $("#file-4").fileinput({
-        theme: 'fa',
-        uploadExtraData: { kvId: '10' }
-    });
-    $(".btn-warning").on('click', function () {
-        var $el = $("#file-4");
-        if ($el.attr('disabled')) {
-            $el.fileinput('enable');
-        } else {
-            $el.fileinput('disable');
-        }
+    </script>
+}
     });
     $(".btn-info").on('click', function () {
         $("#file-4").fileinput('refresh', { previewClass: 'bg-info' });

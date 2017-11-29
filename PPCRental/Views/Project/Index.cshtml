@@ -1,114 +1,136 @@
 ﻿@model IEnumerable<object>
+@using PPCRental.Models;
 
 
 @{
+    var db = new PPCRentalEntities2();
     ViewBag.Title = "Listings";
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<PPCRental.Models.PROPERTY> lstProperty = Model.ToList()[0] as List<PPCRental.Models.PROPERTY>;
     List<PPCRental.Models.DISTRICT> lstDistrict = Model.ToList()[1] as List<PPCRental.Models.DISTRICT>;
     List<PPCRental.Models.PROPERTY_TYPE> lstPType = Model.ToList()[2] as List<PPCRental.Models.PROPERTY_TYPE>;
+    var District = new SelectList(db.DISTRICTs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "DistrictName");
+    var Type = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
+    var Ward = new SelectList(db.WARDs, "ID", "WardName");
+    var Street = new SelectList(db.STREETs.Take(0), "ID", "StreetName");
+
+
+
 }
 <!DOCTYPE HTML>
 <head>
     <meta charset="utf-8" />
     <title>Listings</title>
-    @Styles.Render("~/Content/css")
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/index.css" rel="stylesheet" />
+    <link href="~/Content/carousel.css" rel="stylesheet" />
+   
 </head>
 <body>
     <br />
     <h3 style="margin-top:30px">Listings</h3>
     <hr class="featurette-divider">
-
+    
     <br />
     <br />
-    <div class="container">
+    <form>
+        <div class="container">
+            <div id="post">
 
-        <div id="post">
-
-            <div class="row">
-                @foreach (var item in lstProperty)
-                {
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img src="~/Images/@item.Avatar" alt="@item.Avatar" />
-                            <div class="caption">
-                                <h3 class="card-title">@item.PropertyName</h3>
-                                <h4 class="card-subtitle mb-2 text-muted">@item.DISTRICT.DistrictName, @item.WARD.WardName, @item.STREET.StreetName</h4>
-                                <p>@item.Content.Substring(1, 10)...</p>
-                                <p>Price: @item.Price</p>
-                                <p><a href="/Project/Details/@item.ID" class="btn btn-primary" role="button"> Xem tiếp </a></p>
+                <div class="row">
+                    @foreach (var item in lstProperty)
+                    {
+                        <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail">
+                                <img src="~/Images/@item.Avatar" alt="@item.Avatar" />
+                                <div class="caption">
+                                    <h3 class="card-title">@item.PropertyName</h3>
+                                    <h4 class="card-subtitle mb-2 text-muted">@item.DISTRICT.DistrictName, @item.WARD.WardName, @item.STREET.StreetName</h4>
+                                    <p>@item.Content.Substring(1, 10)...</p>
+                                    <p>Price: @item.Price</p>
+                                    <p><a href="/Project/Details/@item.ID" class="btn btn-primary" role="button"> Xem tiếp </a></p>
+                                </div>
                             </div>
+                            <!--
+                            Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                            Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                            Html.ActionLink("Delete", "Delete", new { id=item.ID })
+                            -->
+
+
                         </div>
-                        <!--
-                        Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-                        Html.ActionLink("Details", "Details", new { id=item.ID }) |
-                        Html.ActionLink("Delete", "Delete", new { id=item.ID })
-                        -->
 
-
-                    </div>
-
-                }
-            </div>
-
-        </div>
-        <div id="sidebar">
-
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-md-offset-3 col-lg-offset-0">
-                    <div class="well">
-                        <h3 align="center">Filter</h3>
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <label for="location1" class="control-label">District</label>
-                                
-                                <select class="form-control" name="" id="location1">
-                                    <option value="99">All ares</option>
-                                    @foreach (var item in lstDistrict){
-                                    if(@item.ID <=54  &&item.ID >=31){
-                                    <option value="@item.ID">@item.DistrictName</option>
-                                    }
-                                    }
-                                    
-
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="type1" class="control-label">Type</label>
-                                <select class="form-control" name="" id="location1">
-                                    <option value="99">All Type</option>
-                                    @foreach (var item in lstPType)
-                                    {
-                                       
-                                            <option value="@item.CodeType">@item.CodeType</option>
-                                      
-                                    }
-
-
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="pricefrom" class="control-label">Min Price</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon" id="basic-addon1">$</div>
-                                    <input type="text" class="form-control" id="pricefrom" aria-describedby="basic-addon1">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="priceto" class="control-label">Max Price</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon" id="basic-addon2">$</div>
-                                    <input type="text" class="form-control" id="priceto" aria-describedby="basic-addon1">
-                                </div>
-                            </div>
-                            <p class="text-center"><a href="#" class="btn btn-danger btn-block glyphicon glyphicon-filter" role="button"></a></p>
-                        </form>
-                    </div>
+                    }
                 </div>
 
             </div>
-        </div>
+            <div id="sidebar">
 
-    </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-md-offset-3 col-lg-offset-0">
+                        <div class="well">
+                            <h3 align="center">Filter</h3>
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="location1" class="control-label">District</label>
+                                    <br />
+                                    @Html.DropDownList("District", District, "All District", new { @class = "form-control" })
+                                </div>
+                                @*<div class="form-group">
+                                        <label for="type1" class="control-label">Ward</label>
+                                        <br />
+                                        @Html.DropDownList("Ward", Ward, "All Ward", new { @class = "form-control" })
+                                    </div>*@
+                                <div class="form-group">
+                                    <label for="type1" class="control-label">Street</label>
+                                    <br />
+                                    @Html.DropDownList("Street", Street, "All Street", new { @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="type1" class="control-label">Type</label>
+                                    <br />
+                                    @Html.DropDownList("Type", Type, "All Type", new { @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="pricefrom" class="control-label">Min Price</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon" id="basic-addon1">$</div>
+                                        <input type="text" class="form-control" id="pricefrom" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="priceto" class="control-label">Max Price</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon" id="basic-addon2">$</div>
+                                        <input type="text" class="form-control" id="priceto" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                @*<p class="text-center"><a href="#" class="btn btn-danger btn-block glyphicon glyphicon-filter" role="button"></a></p>*@
+                                <input type="submit" value="Filter" class="btn btn-danger btn-block glyphicon glyphicon-filter" />
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </form>
     
 </body>
+@section Scripts {
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script>
+    $('#District').select2();
+    $('#Type').select2();
+    $('#Ward').select2();
+    $('#Street').select2();
+    $('#District').on('change', function () {
+        $('#Ward').empty();
+        $.getJSON('GetStreet?did='+ $('#District').val(), function (json) {
+            $('#Street').select2({ data: json });
+        });
+    });
+    </script>
+}
