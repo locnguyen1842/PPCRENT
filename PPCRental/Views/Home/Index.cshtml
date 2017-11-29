@@ -28,6 +28,8 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </head>
+@using (Html.BeginForm())
+{
 <body>
     <section class="hero">
         <header>
@@ -60,7 +62,7 @@
                         <span class="glyphicon glyphicon-filter" style=""></span> <strong>Filter</strong>
                     </div>
                     <div class="panel-body" style="background-color:#F0FFFF">
-                        <form class="form-inline" action="/Project/Index" role="form">
+                        <form class="form-inline" action="/Project/Index" role="form" method="post">
                             <div class="form-row">
                                 <div class="form-group">
                                     <div class="col">
@@ -187,6 +189,8 @@
 
 
 </body>
+}
+
 </html>
 @section Scripts {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />

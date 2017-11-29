@@ -19,24 +19,30 @@ namespace PPCRental.Controllers
         // GET: /Project/
         public ActionResult Index()
         {
-            List<object> myModel = new List<object>();
-            myModel.Add(db.PROPERTies.ToList());
+            
+            var pro = db.PROPERTies.ToList();
             ViewBag.District_ID = new SelectList(db.DISTRICTs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "DistrictName");
             
             ViewBag.PropertyType_ID = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
            
             ViewBag.Feature_ID = new SelectList(db.FEATUREs, "ID", "FeatureName");
-            return View(myModel);
+            
+
+            return View(pro);
             //var properties = db.PROPERTies.Include(p => p.DISTRICT).Include(p => p.PROJECT_STATUS).Include(p => p.PROPERTY_TYPE).Include(p => p.STREET).Include(p => p.USER).Include(p => p.USER1).Include(p => p.WARD);
             
         }
         [HttpPost]
-        public ActionResult Index(int? District,int? Street,int? Type)
+        public ActionResult Index(int? District_ID,int? PropertyType_ID , int? min , int? max)
         {
-            var db = new PPCRentalEntities2();
-            var model = db.PROPERTies.Where(s => s.District_ID == District).ToList();
-            //var properties = db.PROPERTies.Include(p => p.DISTRICT).Include(p => p.PROJECT_STATUS).Include(p => p.PROPERTY_TYPE).Include(p => p.STREET).Include(p => p.USER).Include(p => p.USER1).Include(p => p.WARD);
-            return RedirectToAction("Filter");
+            ViewBag.District_ID = new SelectList(db.DISTRICTs.Where(y => y.ID >= 31 && y.ID <= 54), "ID", "DistrictName");
+
+            ViewBag.PropertyType_ID = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
+
+            ViewBag.Feature_ID = new SelectList(db.FEATUREs, "ID", "FeatureName");
+            var pro = db.PROPERTies.Where(a => a.District_ID == District_ID || a.PropertyType_ID == PropertyType_ID || (a.Price <=max && a.Price >= min ));
+            
+            return View(pro.ToList());
         }
 
         // GET: /Project/Details/5
@@ -230,13 +236,7 @@ namespace PPCRental.Controllers
             }
             base.Dispose(disposing);
         }
-        [HttpPost]
-        public ActionResult Filter(List<PROPERTY> model)
-        {
-            var db = new PPCRentalEntities2();
-            return View();
-
-        }
+       
         public JsonResult GetStreet( int did)
         {
             var db = new PPCRentalEntities2();
@@ -259,21 +259,6 @@ namespace PPCRental.Controllers
             
 
         }
-        public ActionResult Filter(int? district, int? type, int? min, int? max)
-        {
-            List<object> myModel = new List<object>();
-            myModel.Add(db.PROPERTies.ToList());
-
-            var pro = db.PROPERTies.ToList();
-            if (district != ViewBag.DisTrict_ID)
-            {
-                pro = pro.Where(p => p.District_ID == district).ToList();
-            }
-            if (type != ViewBag.PropertyType_ID)
-            {
-                pro = pro.Where(p => p.District_ID == type).ToList();
-            }
-            return View(pro);
-        }
+     
     }
 }

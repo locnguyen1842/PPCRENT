@@ -1,4 +1,4 @@
-﻿@model IEnumerable<object>
+﻿@model IEnumerable<PPCRental.Models.PROPERTY>
 @using PPCRental.Models;
 
 
@@ -6,7 +6,7 @@
     var db = new PPCRentalEntities2();
     ViewBag.Title = "Listings";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    List<PPCRental.Models.PROPERTY> lstProperty = Model.ToList()[0] as List<PPCRental.Models.PROPERTY>;
+    
     var Type = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
     var Ward = new SelectList(db.WARDs, "ID", "WardName");
     var Street = new SelectList(db.STREETs.Take(0), "ID", "StreetName");
@@ -23,19 +23,21 @@
     <link href="~/Content/carousel.css" rel="stylesheet" />
    
 </head>
-<body>
+
     <br />
     <h3 style="margin-top:30px">Listings</h3>
     <hr class="featurette-divider">
     
     <br />
     <br />
+@using (Html.BeginForm())
+{ 
     <form>
         <div class="container">
             <div id="post">
                 
                 <div class="row">
-                    @foreach (var item in  lstProperty)
+                    @foreach (var item in  Model)
                     {
                         <div class="col-sm-6 col-md-4">
                             <div class="thumbnail">
@@ -67,7 +69,7 @@
                     <div class="col-lg-3 col-md-6 col-md-offset-3 col-lg-offset-0">
                         <div class="well">
                             <h3 align="center">Filter</h3>
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" method="post">
                                 <div class="form-group">
                                     <label for="location1" class="control-label">District</label>
                                     <br />
@@ -88,14 +90,14 @@
                                     <label for="pricefrom" class="control-label">Min Price</label>
                                     <div class="input-group">
                                         <div class="input-group-addon" id="basic-addon1">$</div>
-                                        <input type="text" class="form-control" id="pricefrom" aria-describedby="basic-addon1">
+                                        <input type="text"  name="min" class="form-control" id="pricefrom" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="priceto" class="control-label">Max Price</label>
                                     <div class="input-group">
                                         <div class="input-group-addon" id="basic-addon2">$</div>
-                                        <input type="text" class="form-control" id="priceto" aria-describedby="basic-addon1">
+                                        <input type="text" name="max" class="form-control" id="priceto" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
                                 @*<p class="text-center"><a href="#" class="btn btn-danger btn-block glyphicon glyphicon-filter" role="button"></a></p>*@
@@ -109,8 +111,9 @@
 
         </div>
     </form>
+}
     
-</body>
+
 @section Scripts {
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
