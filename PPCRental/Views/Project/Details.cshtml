@@ -23,8 +23,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="page-header">
-                    Real Estates Detail
+                    @Html.DisplayFor(Model => Model.PropertyName)
                 </h2>
+                <h6 style="color:grey">
+                    @Html.DisplayFor(Model => Model.DISTRICT.DistrictName),
+                    @Html.DisplayFor(Model => Model.WARD.WardName)
+                    @Html.DisplayFor(Model => Model.STREET.StreetName).
+                </h6>
             </div>
         </div>
 
@@ -43,9 +48,20 @@
                         <div class="text-center" id="author">
                             <img src="~/Background/property_1.jpg">
                             <h3>@Html.DisplayFor(Model => Model.USER.FullName)</h3>
-                            <small class="label label-warning">@Html.DisplayFor(Model => Model.USER.Address)</small>
-                            <p>Discription for<strong> @Html.DisplayFor(Model => Model.PropertyName)</strong></p>
-                            <p>@Html.DisplayFor(Model => Model.Content)</p>
+                            @*<small class="label label-warning">@Html.DisplayFor(Model => Model.USER.Address)</small>*@
+                            <p>Address: <strong>   @Html.DisplayFor(Model => Model.USER.Address)
+                                            </strong></p>
+                            <p>
+                                Phone: <strong>
+                                    @Html.DisplayFor(Model => Model.USER.Phone)
+                                </strong>
+                            </p>
+                            <p>
+                                Email: <strong>
+                                           <a href="mailto:@Html.DisplayFor(Model => Model.USER.Email)">@Html.DisplayFor(Model => Model.USER.Email)</a> 
+                                </strong>
+                            </p>
+                            <p></p>
                             <p class="sosmed-author">
                                 <a href="#"><i class="fa fa-facebook" title="Facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter" title="Twitter"></i></a>
