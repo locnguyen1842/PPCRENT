@@ -48,7 +48,7 @@
                 <label class=" col-md-4 control-label">PropertyName</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    <input name="PropertyName" class="form-control" type="text">
+                    <input name="PropertyName" class="form-control" type="text" required>
                     @*@Html.EditorFor(model => model.PropertyName)*@
                     @Html.ValidationMessageFor(model => model.PropertyName)
                 </div>
@@ -57,7 +57,7 @@
             <div class="form-group" @*style="float:right;margin-right:150px"*@>
                 @Html.LabelFor(model => model.Avatar, new { @class = "control-label col-md-4" })
                 <div class="col-md-4">
-                    <input class="form-control" type="file" name="AvatarUpload" accept="image/*" />
+                    <input class="form-control" type="file" name="AvatarUpload" accept="image/*" required />
                     @Html.ValidationMessageFor(model => model.Avatar)
                 </div>
             </div>
@@ -65,7 +65,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Images, new { @class = "control-label col-md-4" })
                 <div class="col-md-4">
-                    <input class="form-control" type="file" name="Up" accept="image/*" multiple />
+                    <input class="form-control" type="file" name="Up" accept="image/*" multiple required />
                     @Html.ValidationMessageFor(model => model.Images)
                 </div>
             </div>
@@ -75,7 +75,7 @@
                 <label class="col-md-4 control-label">Type</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    @Html.DropDownList("PropertyType_ID", null, new { @class = "form-control" })
+                    @Html.DropDownList("PropertyType_ID", null, new { @class = "form-control" } )
                     @Html.ValidationMessageFor(model => model.PropertyType_ID)
                 </div>
             </div>
@@ -85,7 +85,7 @@
                 <label class=" col-md-4 control-label">Content</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-pencil"></i></span>
-                    <textarea class="form-control" name="Content" placeholder="Project Description"></textarea>
+                    <textarea class="form-control" name="Content" placeholder="Project Description" required></textarea>
                     @Html.ValidationMessageFor(model => model.Content)
                 </div>
             </div>
@@ -127,7 +127,7 @@
                 <label class=" col-md-4 control-label">Price</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-usd"></i></span>
-                    <input name="Price" class="form-control" type="text">
+                    <input name="Price" class="form-control" type="text" required>
                     @Html.ValidationMessageFor(model => model.Price)
                 </div>
             </div>
@@ -139,7 +139,7 @@
                 <label class=" col-md-4 control-label">Area</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    <input name="Area" class="form-control" type="text">
+                    <input name="Area" class="form-control" type="text" required>
                     @Html.ValidationMessageFor(model => model.Area)
                 </div>
             </div>
@@ -149,7 +149,7 @@
                 <label class=" col-md-4 control-label">BedRoom</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    <input name="BedRoom" class="form-control" type="text">
+                    <input name="BedRoom" class="form-control" type="text" required>
                     @Html.ValidationMessageFor(model => model.BedRoom)
                 </div>
             </div>
@@ -159,7 +159,7 @@
                 <label class=" col-md-4 control-label">BathRoom</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-info-sign"></i></span>
-                    <input name="BathRoom" class="form-control" type="text">
+                    <input name="BathRoom" class="form-control" type="text" required>
                     @Html.ValidationMessageFor(model => model.BathRoom)
                 </div>
             </div>
@@ -169,7 +169,7 @@
                 <label class=" col-md-4 control-label">Parking Place</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-heart-empty"></i></span>
-                    <input name="PackingPlace" class="form-control" type="text">
+                    <input name="PackingPlace" class="form-control" type="text" required>
                     @Html.ValidationMessageFor(model => model.PackingPlace)
                 </div>
             </div>
@@ -181,7 +181,7 @@
                 <label class=" col-md-4 control-label">Note</label>
                 <div class="col-md-4 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-pencil"></i></span>
-                    <textarea class="form-control" name="Note" placeholder="Description Here"></textarea>
+                    <textarea class="form-control" name="Note" placeholder="Description Here" ></textarea>
                     @Html.ValidationMessageFor(model => model.Note)
                 </div>
             </div>
