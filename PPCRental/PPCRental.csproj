@@ -191,9 +191,11 @@
     <Content Include="Background\hero.jpg" />
     <Content Include="Background\hero_small.jpg" />
     <Content Include="Background\logo.png" />
+    <Content Include="Background\PhilipTown.jpg" />
     <Content Include="Background\property_1.jpg" />
     <Content Include="Background\property_2.jpg" />
     <Content Include="Background\property_3.jpg" />
+    <Content Include="Background\romace.jpg" />
     <Content Include="Background\search_arrow.png" />
     <Content Include="Background\social_media.png" />
     <Content Include="Content\bootstrap.css" />
@@ -211,6 +213,8 @@
     <Content Include="Content\reset.css" />
     <Content Include="Content\responsive.css" />
     <Content Include="Content\sb-admin-2.css" />
+    <Content Include="Content\stylelogin.css" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -273,6 +277,10 @@
     <Content Include="fonts\p22_corinthia.eot" />
     <Content Include="fonts\p22_corinthia.ttf" />
     <Content Include="fonts\p22_corinthia.woff" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Scripts\index.js" />
+    <Content Include="Views\Project\Login.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap1.js" />
     <Content Include="Scripts\bootstrap1.min.js" />
@@ -320,6 +328,7 @@
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Project\Filter.cshtml" />
+    <Content Include="Views\Project\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

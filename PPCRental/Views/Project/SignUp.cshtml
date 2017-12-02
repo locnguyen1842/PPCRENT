@@ -1,0 +1,78 @@
+﻿@model IEnumerable<object>
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+   
+    <link href="~/Content/stylelogin.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="overlay">
+        <!-- LOGN IN FORM by Omar Dsoky -->
+        <form>
+            <!--   con = Container  for items in the form-->
+            <div class="con">
+                <!--     Start  header Content  -->
+                <header class="head-form">
+                    <h2>Sign Up</h2>
+                    <!--     A welcome message or an explanation of the login form -->
+                    <p>Your basic info</p>
+                </header>
+                <!--     End  header Content  -->
+                <br>
+                <div class="field-set">
+
+                    <!--   Email -->
+                    <span class="input-item">
+                        <i class="fa fa-user-circle"></i>
+                    </span>
+                    <!--   Email Input-->
+                    <input class="form-input" id="txt-input" type="text" placeholder="Email" required>
+
+                    <br>
+                    <!--   Full name -->
+                    <span class="input-item">
+                        <i class="fa fa-user-circle"></i>
+                    </span>
+                    <!--   Full name Input-->
+                    <input class="form-input" id="txt-input" type="text" placeholder="Full name" required>
+
+                    <br>
+
+                    <!--   Password -->
+
+                    <span class="input-item">
+                        <i class="fa fa-key"></i>
+                    </span>
+                    <!--   Password Input-->
+                    <input class="form-input" type="password" placeholder="Password" id="pwd" name="password" required>
+
+                    <br>
+                    <!--        buttons -->
+                    <!--      button LogIn -->
+                    <button class="log-in"> Sign Up </button>
+                </div>
+
+                <!--   other buttons -->
+                <div class="other">
+                    <p>Already have an account ? @Html.ActionLink("Login","Login")</p>
+                    <!--      End Other the Division -->
+                </div>
+                <!--   End Conrainer  -->
+            </div>
+
+            <!-- End Form -->
+        </form>
+    </div>
+    <script src="~/Scripts/index.js"></script>
+</body>
+</html>
+

@@ -236,6 +236,7 @@ namespace PPCRental.Areas.Admin.Controllers
             }
             return RedirectToAction("ViewListofAgencyProject");
         }
+        
 
         public JsonResult GetStreet(int District_id)
         {

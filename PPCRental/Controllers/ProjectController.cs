@@ -237,6 +237,20 @@ namespace PPCRental.Controllers
             return View();
 
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(USER user)
+        {
+           
+            return View();
+        }
+        public ActionResult SignUp()
+        {
+            return View();
+        }
         public JsonResult GetStreet( int did)
         {
             var db = new PPCRentalEntities2();
