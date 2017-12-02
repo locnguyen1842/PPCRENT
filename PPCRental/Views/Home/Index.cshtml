@@ -6,7 +6,7 @@
     var db = new PPCRentalEntities2();
     ViewBag.Title = "Home Page";
 
-    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     List<PPCRental.Models.PROPERTY> lstProperty = Model.ToList()[0] as List<PPCRental.Models.PROPERTY>;
     var Type = new SelectList(db.PROPERTY_TYPE, "ID", "CodeType");
     var Ward = new SelectList(db.WARDs, "ID", "WardName");
@@ -19,15 +19,16 @@
     <title>PPC Rental</title>
 
     <!-- Custom styles for this template -->
-    @*<link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
         <link href="~/Content/index.css" rel="stylesheet" />
-        <link href="~/Content/carousel.css" rel="stylesheet" />*@
+        <link href="~/Content/carousel.css" rel="stylesheet" />
     <link href="~/Content/reset.css" rel="stylesheet" />
     <link href="~/Content/main.css" rel="stylesheet" />
     <link href="~/Content/responsive.css" rel="stylesheet" />
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </head>
+
 <body>
     <section class="hero">
         @*<header>
@@ -55,12 +56,12 @@
             @*<div class="container" style="float:left">
                 <div class="row mt-5">*@
             <div class="col-md-12 h-25 ml-5">
-                <div class="panel panel-default h-25 w-50 mx-auto" style="margin-top: 200px">
+                <div class="panel panel-default h-25 w-50 mx-auto" style="margin-top: 120px">
                     <div class="panel-heading" style="background-color: #829ce482">
                         <span class="glyphicon glyphicon-filter" style=""></span> <strong>Filter</strong>
                     </div>
                     <div class="panel-body" style="background-color:#F0FFFF">
-                        <form class="form-inline" action="/Project/Index" role="form">
+                        <form class="form-inline" action="/Project/Index" role="form" method="post">
                             <div class="form-row">
                                 <div class="form-group">
                                     <div class="col">
@@ -130,11 +131,7 @@
     </section>
     <br />
     <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <h2>What you loking for</h2>
+        <h2>What you loking for</h2>
     <section class="listings">
         <div class="wrapper" style="font-family:'Times New Roman';font-size:15px">
             <div id="properties_list">
@@ -187,6 +184,8 @@
 
 
 </body>
+
+
 </html>
 @section Scripts {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
