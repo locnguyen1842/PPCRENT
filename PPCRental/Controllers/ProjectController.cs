@@ -250,11 +250,42 @@ namespace PPCRental.Controllers
         [HttpPost]
         public ActionResult Login(USER user)
         {
-           
+            if (ModelState.IsValid)
+            {
+                {
+                    var obj = db.USERs.Where(a => a.Email.Equals(user.Email) && a.Password.Equals(user.Password)).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        Session["Email"] = obj.Email.ToString();
+                        Session["UserName"] = obj.FullName.ToString();
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Email or Password is wrong.");
+                    }
+                }
+            }
             return View();
         }
+        [HttpGet]
         public ActionResult SignUp()
         {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SignUp(USER user)
+        {
+            if (ModelState.IsValid)
+            {
+                user.Role = 1.ToString();
+                user.Status = true;
+                db.USERs.Add(user);
+                db.SaveChanges();
+                ModelState.Clear();
+                ViewBag.Message = user.FullName + "Successfully.";
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
         public JsonResult GetStreet( int did)

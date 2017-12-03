@@ -11,7 +11,8 @@ namespace PPCRental.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class USER
     {
         public USER()
@@ -19,10 +20,12 @@ namespace PPCRental.Models
             this.PROPERTies = new HashSet<PROPERTY>();
             this.PROPERTies1 = new HashSet<PROPERTY>();
         }
-    
         public int ID { get; set; }
+        [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
+        [Required(ErrorMessage = "Fullname is required")]
         public string FullName { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }

@@ -25,7 +25,14 @@
 
                         
                     </ul>
-                    <a href="~/Project/Login" class="login_btn">Login</a>
+                    @if (Session["UserName"] != null)
+                    {
+                        <a> Welcome @Session["UserName"].ToString()</a>
+                    }
+                    else
+                    {
+                        <a href="~/Project/Login" class="login_btn">Login</a>
+                    }
                 </nav>
             </div>
         </header>
