@@ -1,4 +1,4 @@
-﻿@model IEnumerable<object>
+﻿@model PPCRental.Models.USER
 @{
     ViewBag.Title = "Login";
     Layout = null;
@@ -15,6 +15,8 @@
     <link href="~/Content/stylelogin.css" rel="stylesheet" />
 </head>
 <body>
+@using (Html.BeginForm("Login", "Project", FormMethod.Post))
+{
     <div class="overlay">
         <!-- LOGN IN FORM by Omar Dsoky -->
         <form>
@@ -31,29 +33,23 @@
                 <div class="field-set">
 
                     <!--   Email -->
-                    <span class="input-item">
-                        <i class="fa fa-user-circle"></i>
-                    </span>
-                    <!--   Email Input-->
-                    <input class="form-input" id="txt-input" type="text" placeholder="Email" required>
-
-                    <br>
-
+                    <div id="Email">
+                        <span class="input-item">
+                            <i class="fa fa-user-circle"></i>
+                        </span>
+                        <!--   Email Input-->
+                        @*<input class="form-input" id="txt-input" type="text" placeholder="Email" required>*@
+                        @Html.TextBoxFor(Model => Model.Email, new { @class = "form-input", @placeholder = "Email" })
+                    </div>
                     <!--   Password -->
-
-                    <span class="input-item">
-                        <i class="fa fa-key"></i>
-                    </span>
-                    <!--   Password Input-->
-                    <input class="form-input" type="password" placeholder="Password" id="pwd" name="password" required>
-
-                    <!--      Show/hide password  -->
-                    @*<span>
-                        <i class="fa fa-eye" aria-hidden="true" type="button" id="eye"></i>
-                    </span>*@
-
-
-                    <br>
+                    <div>
+                        <span class="input-item">
+                            <i class="fa fa-key"></i>
+                        </span>
+                        <!--   Password Input-->
+                        @*<input class="form-input" type="password" placeholder="Password" id="pwd" name="password" required>*@
+                        @Html.PasswordFor(Model => Model.Password, new { @class = "form-input", @placeholder = "Password" })
+                    </div>
                     <!--        buttons -->
                     <!--      button LogIn -->
                     <button class="log-in"> Log In </button>
@@ -66,7 +62,7 @@
                     <!--     Sign Up button -->
                     @*<a href="~/Project/Login" class="login_btn">Login</a>*@
                         <button class="btn submits sign-up">
-                             @Html.ActionLink("Sign Up","SignUp");
+                             @Html.ActionLink("Sign Up", "SignUp");
                             <!--         Sign Up font icon -->
                             <i class="fa fa-user-plus" aria-hidden="true"></i>
                         </button>
@@ -80,6 +76,7 @@
         </form>
     </div>
     <script src="~/Scripts/index.js"></script>
+}
 </body>
 </html>
 

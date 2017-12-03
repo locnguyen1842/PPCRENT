@@ -276,8 +276,11 @@ namespace PPCRental.Controllers
         [HttpPost]
         public ActionResult SignUp(USER user)
         {
+            int ID = 3;
+            ID = ID * ID + 3 *ID;
             if (ModelState.IsValid)
             {
+                user.ID = ID * ID + 103;
                 user.Role = 1.ToString();
                 user.Status = true;
                 db.USERs.Add(user);
@@ -286,6 +289,7 @@ namespace PPCRental.Controllers
                 ViewBag.Message = user.FullName + "Successfully.";
                 return RedirectToAction("Index", "Home");
             }
+            ID = ID++;
             return View();
         }
         public JsonResult GetStreet( int did)
