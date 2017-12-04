@@ -17,17 +17,15 @@
 <body style="padding-top:0rem;margin-top:0px">
         <header>
             <div>
-                
                 <img src="~/Images/PPCRentalLogo.png" style="height:100px;width:200px"/>
                 <nav>
-                    
                     <ul>
-
-                        
                     </ul>
                     @if (Session["UserName"] != null)
                     {
-                        <a> Welcome @Session["UserName"].ToString()</a>
+                       <p style="margin-right:40px">Welcome @Session["UserName"].ToString() </p>
+                       <br />
+                    @Html.ActionLink("Logout","Logout", "Project","",new {@class = "btn btn-danger"})
                     }
                     else
                     {

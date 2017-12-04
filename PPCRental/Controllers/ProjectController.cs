@@ -290,6 +290,11 @@ namespace PPCRental.Controllers
             ID = ID++;
             return View();
         }
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login","Project");
+        }
         public JsonResult GetStreet( int did)
         {
             var db = new PPCRentalEntities2();
