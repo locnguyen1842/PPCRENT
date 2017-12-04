@@ -250,13 +250,12 @@ namespace PPCRental.Controllers
         [HttpPost]
         public ActionResult Login(USER user)
         {
-            if (ModelState.IsValid)
-            {
-                {
-                    var obj = db.USERs.Where(a => a.Email.Equals(user.Email) && a.Password.Equals(user.Password)).FirstOrDefault();
+            
+                    //var obj = db.USERs.Where(a => a.Email.Equals(user.Email) && a.Password.Equals(user.Password)).FirstOrDefault();
+                    var obj = db.USERs.SingleOrDefault(x => x.Email == user.Email && x.Password == user.Password);
                     if (obj != null)
                     {
-                        Session["Email"] = obj.Email.ToString();
+                        //Session["Email"] = obj.Email.ToString();
                         Session["UserName"] = obj.FullName.ToString();
                         return RedirectToAction("Index", "Home");
                     }
@@ -264,8 +263,7 @@ namespace PPCRental.Controllers
                     {
                         ModelState.AddModelError("", "Email or Password is wrong.");
                     }
-                }
-            }
+                
             return View();
         }
         [HttpGet]
@@ -276,7 +274,7 @@ namespace PPCRental.Controllers
         [HttpPost]
         public ActionResult SignUp(USER user)
         {
-            int ID = 3;
+            int ID = 4;
             ID = ID * ID + 3 *ID;
             if (ModelState.IsValid)
             {
